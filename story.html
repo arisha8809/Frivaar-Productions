@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Story — Frivaar Productions</title>
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    /* ---- STORY HERO ---- */
+    .story-hero {
+      height: 60vh;
+      min-height: 480px;
+      display: flex;
+      align-items: flex-end;
+      padding: 5rem 6rem;
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+    }
+
+    .story-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(212,160,23,0.05) 0%, transparent 60%);
+    }
+
+    .story-hero-line {
+      position: absolute;
+      top: 0;
+      right: 8%;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(212,160,23,0.3), transparent);
+    }
+
+    .story-hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .story-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 300;
+      line-height: 1;
+      color: var(--cream);
+    }
+
+    .story-hero h1 em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    /* ---- ORIGIN SECTION ---- */
+    .origin-section {
+      padding: 8rem 6rem;
+      background: var(--black-2);
+      position: relative;
+    }
+
+    .origin-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+
+    .origin-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .origin-sticky {
+      position: sticky;
+      top: 4rem;
+      min-height: 460px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2.5rem 2rem;
+      border: 1px solid rgba(212, 160, 23, 0.15);
+      overflow: hidden;
+    }
+
+    .origin-sticky-media {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, rgba(212,160,23,0.1) 0%, var(--black-4) 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 0;
+    }
+
+    .origin-sticky-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .origin-sticky-initials {
+      font-family: var(--font-display);
+      font-size: 6rem;
+      font-weight: 300;
+      color: rgba(212, 160, 23, 0.15);
+    }
+
+    .origin-sticky-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10,10,10,0.15) 0%, rgba(10,10,10,0.6) 55%, rgba(10,10,10,0.94) 100%);
+      z-index: 1;
+    }
+
+    .origin-sticky-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .origin-sticky-person {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(212, 160, 23, 0.25);
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .origin-sticky-person-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--cream);
+    }
+
+    .origin-sticky-person-role {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .chapter-num {
+      font-family: var(--font-display);
+      font-size: 4.5rem;
+      font-weight: 700;
+      color: rgba(212, 160, 23, 0.3);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .chapter-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .chapter-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.2;
+    }
+
+    .origin-body p {
+      font-family: var(--font-ui);
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--cream-dim);
+      margin-bottom: 1.75rem;
+    }
+
+    .origin-body p strong {
+      color: var(--cream);
+      font-weight: 600;
+    }
+
+    .origin-body .pull-quote {
+      border-left: 2px solid var(--gold);
+      padding: 1rem 0 1rem 2rem;
+      margin: 2.5rem 0;
+    }
+
+    .pull-quote p {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--cream) !important;
+      line-height: 1.4;
+      margin-bottom: 0 !important;
+    }
+
+    /* ---- MUKTI FILM ---- */
+    .mukti-section {
+      padding: 6rem;
+      background: var(--black);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .mukti-video {
+      position: relative;
+      aspect-ratio: 16/9;
+      background: var(--black-3);
+      border: 1px solid rgba(212,160,23,0.2);
+      overflow: hidden;
+      cursor: none;
+    }
+
+    .mukti-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .mukti-video-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 50%);
+    }
+
+    .mukti-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px;
+      height: 64px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 20px;
+      background: rgba(10,10,10,0.6);
+      backdrop-filter: blur(4px);
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .mukti-video:hover .mukti-play-btn {
+      background: var(--gold);
+      color: var(--black);
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .mukti-text .film-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid var(--gold-dim);
+      padding: 0.35rem 0.85rem;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .mukti-text h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .mukti-text h2 em { color: var(--gold); }
+
+    .mukti-text p {
+      font-family: var(--font-ui);
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--cream-dim);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ---- TEAM ---- */
+    .team-section {
+      padding: 6rem 6rem 8rem;
+      background: var(--black);
+    }
+
+    .team-header {
+      margin-bottom: 3rem;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .team-card {
+      background: var(--black-3);
+      border: 1px solid rgba(212,160,23,0.08);
+      padding: 1.75rem 1.5rem;
+      transition: border-color 0.3s;
+    }
+
+    .team-card:hover {
+      border-color: rgba(212,160,23,0.3);
+    }
+
+    .team-avatar-mini {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--black-4);
+      border: 1px solid rgba(212,160,23,0.2);
+      margin-bottom: 1rem;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .team-avatar-mini img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .team-initials {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: var(--gold-dim);
+    }
+
+    .team-name {
+      font-family: var(--font-ui);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 0.2rem;
+    }
+
+    .team-role {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 900px) {
+      .story-hero { padding: 3rem 2rem; height: auto; padding-top: 5rem; }
+      .origin-section, .team-section { padding: 5rem 2rem; }
+      .origin-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .origin-sticky { position: static; }
+      .origin-sticky { min-height: 320px; }
+      .mukti-section { grid-template-columns: 1fr; padding: 4rem 2rem; }
+      .team-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-transition"></div>
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<!-- ===== SIDE NAV ===== -->
+<nav class="side-nav">
+  <div class="nav-logo">
+    <img src="assets/logo.png" alt="Frivaar Productions" />
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html"><i class="ti ti-home nav-icon"></i><span class="nav-label">Home</span></a></li>
+    <li><a href="story.html" class="active"><i class="ti ti-book nav-icon"></i><span class="nav-label">Story</span></a></li>
+    <li><a href="work.html"><i class="ti ti-vinyl nav-icon"></i><span class="nav-label">Work</span></a></li>
+    <li><a href="milestones.html"><i class="ti ti-trophy nav-icon"></i><span class="nav-label">Journey</span></a></li>
+  </ul>
+  <div class="nav-socials">
+    <a href="https://www.instagram.com/fvproductions_5/" target="_blank"><i class="ti ti-brand-instagram"></i></a>
+    <a href="https://www.youtube.com/channel/UCdWamqRiDXmN7Nq7FU97IEA" target="_blank"><i class="ti ti-brand-youtube"></i></a>
+    <a href="#" target="_blank"><i class="ti ti-brand-spotify"></i></a>
+  </div>
+</nav>
+
+<main class="page-wrap">
+
+  <!-- STORY HERO -->
+  <section class="story-hero">
+    <div class="story-hero-line"></div>
+    <div class="story-hero-content">
+      <p class="eyebrow" style="opacity:0;animation:fadeUp 0.8s ease forwards 0.4s;">The Story of Frivaar</p>
+      <h1 style="opacity:0;animation:fadeUp 1s ease forwards 0.7s;">
+        A Play.<br/>
+        A Film.<br/>
+        A <em>Movement.</em>
+      </h1>
+    </div>
+  </section>
+
+  <!-- CHAPTER 1: THE BEGINNING -->
+  <section class="origin-section">
+    <div class="origin-grid">
+      <div class="origin-sticky">
+        <div class="origin-sticky-media">
+          <!-- Replace with: <img src="assets/vishal.jpg" alt="Vishal Gupta" /> -->
+          <span class="origin-sticky-initials">VG</span>
+        </div>
+        <div class="origin-sticky-overlay"></div>
+        <div class="origin-sticky-content">
+          <div class="chapter-num reveal">01</div>
+          <p class="chapter-label reveal reveal-delay-1">Chapter One</p>
+          <h2 class="chapter-title reveal reveal-delay-1">The play that started everything</h2>
+          <div class="origin-sticky-person reveal reveal-delay-1">
+            <span class="origin-sticky-person-name">Vishal Gupta</span>
+            <span class="origin-sticky-person-role">Founder · Creative Director</span>
+          </div>
+        </div>
+      </div>
+      <div class="origin-body">
+        <p class="reveal">
+          It began with a performance that stopped time. <strong>Mr. Vishal Gupta</strong> sat in an old age home, watching a play unfold — a story about children who leave their parents behind to chase their dreams. The room was quiet. The air was heavy. Something in him shifted.
+        </p>
+        <div class="pull-quote reveal">
+          <p>"Some stories are too important to stay in one room."</p>
+        </div>
+        <p class="reveal">
+          He didn't want that story to end when the curtain fell. He wanted it to travel — to reach families across Punjab, across India, across the world. So he made a film. A short film titled <strong>Mukti</strong> — liberation, release, peace. And with that, Frivaar Productions was born.
+        </p>
+        <p class="reveal">
+          The name itself holds the vision. <strong>Frivaar</strong> — a bridge between <em>Friday</em> and <em>Shukrvaar</em>, the day every new movie releases in India. The day of new beginnings. The day when stories meet the world.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MUKTI FILM -->
+  <section class="mukti-section">
+    <!--
+      TO UPDATE THIS VIDEO: just paste the full YouTube link (any format —
+      youtube.com/watch?v=..., youtu.be/..., or youtube.com/embed/...)
+      into data-youtube-url below. The thumbnail and click-through are generated automatically.
+      This avoids embed error 153 (owner has disabled embedding) since it links out to YouTube instead of playing inline.
+    -->
+    <div class="mukti-video reveal" data-youtube-url="https://www.youtube.com/watch?v=LDpWh_fQQrQ" data-hover>
+      <img class="mukti-thumb" alt="Mukti — Short Film by Frivaar Productions" />
+      <div class="mukti-video-overlay"></div>
+      <div class="mukti-play-btn"><i class="ti ti-player-play-filled"></i></div>
+    </div>
+    <div class="mukti-text">
+      <div class="film-badge reveal"><i class="ti ti-movie"></i> Short Film · 2020</div>
+      <h2 class="reveal reveal-delay-1"><em>Mukti</em><br/>The film that started it all</h2>
+      <p class="reveal reveal-delay-2">
+        Written from the heart after witnessing a play at an old age home, <em>Mukti</em> is the story that gave Frivaar Productions its soul. A story about parents, about children who leave, about the silence between them.
+      </p>
+      <p class="reveal reveal-delay-2">
+        This short film was the first proof that Frivaar had something real to say — and that the world was ready to listen.
+      </p>
+    </div>
+  </section>
+
+  <!-- CHAPTER 2 & 3: AKSH & LEO -->
+  <section class="origin-section" style="background: var(--black);">
+    <div class="origin-grid">
+      <div class="origin-sticky">
+        <div class="origin-sticky-media">
+          <!-- Replace with: <img src="assets/aksh.jpg" alt="Aksh Kumar" /> -->
+          <span class="origin-sticky-initials">AK</span>
+        </div>
+        <div class="origin-sticky-overlay"></div>
+        <div class="origin-sticky-content">
+          <div class="chapter-num reveal">02</div>
+          <p class="chapter-label reveal reveal-delay-1">Chapter Two</p>
+          <h2 class="chapter-title reveal reveal-delay-1">Punjabi music finds its home</h2>
+          <div class="origin-sticky-person reveal reveal-delay-1">
+            <span class="origin-sticky-person-name">Aksh Kumar</span>
+            <span class="origin-sticky-person-role">Co-Founder · Music Director</span>
+          </div>
+        </div>
+      </div>
+      <div class="origin-body">
+        <p class="reveal">
+          Not long after Mukti, a second voice joined. <strong>Aksh Kumar</strong> arrived with a clear mission: Punjabi culture deserved a bigger platform. The richness of the language, the emotion in its music, the stories in its folk tradition — all of it needed a vehicle that could carry it to a generation growing up between two worlds.
+        </p>
+        <p class="reveal">
+          Together, Vishal and Aksh built something rare — a production house that didn't just make music, but genuinely cared about the artists making it. Frivaar became a launching pad for newcomers. A place where talent didn't need connections or money to be heard.
+        </p>
+        <div class="pull-quote reveal">
+          <p>"We wanted to give artists a stage before the world had decided they deserved one."</p>
+        </div>
+        <p class="reveal">
+          Songs like <em>Powered by Jatt</em>, <em>Dimaag Jatt Da</em>, and <em>Jaro Jaro</em> followed — each one representing an artist who got their first real shot because Frivaar believed in them.
+        </p>
+      </div>
+    </div>
+
+    <div class="origin-grid" style="margin-top: 6rem;">
+      <div class="origin-sticky">
+        <div class="origin-sticky-media">
+          <!-- Replace with: <img src="assets/leo.jpg" alt="Mr. Leo" /> -->
+          <span class="origin-sticky-initials">L</span>
+        </div>
+        <div class="origin-sticky-overlay"></div>
+        <div class="origin-sticky-content">
+          <div class="chapter-num reveal">03</div>
+          <p class="chapter-label reveal reveal-delay-1">Chapter Three</p>
+          <h2 class="chapter-title reveal reveal-delay-1">Going international</h2>
+          <div class="origin-sticky-person reveal reveal-delay-1">
+            <span class="origin-sticky-person-name">Mr. Leo</span>
+            <span class="origin-sticky-person-role">International Partner · Canada</span>
+          </div>
+        </div>
+      </div>
+      <div class="origin-body">
+        <p class="reveal">
+          The third chapter brought a third voice — and a whole new horizon. <strong>Mr. Leo</strong>, joining from Canada as international partner, saw what Frivaar was building and knew it could be something the diaspora would embrace deeply.
+        </p>
+        <p class="reveal">
+          Punjabis are everywhere. In London, in Toronto, in Dubai. They carry their music with them — it's identity, it's memory, it's home. Leo's vision was to make Frivaar the bridge between Punjab and every corner of the world where Punjabis had planted roots.
+        </p>
+        <p class="reveal">
+          Today, Frivaar Productions operates across two countries, with artists, stories, and sounds that travel far beyond Bassi, Punjab — where it all began.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team-section">
+    <div class="team-header">
+      <p class="eyebrow reveal">The people who make it happen</p>
+      <div class="gold-line reveal reveal-delay-1"></div>
+      <h2 class="section-heading reveal reveal-delay-1">The <em>Team</em></h2>
+    </div>
+
+    <div class="team-grid">
+      <!--
+        ADD TEAM MEMBERS BELOW.
+        Copy and paste this block for each team member:
+
+        <div class="team-card reveal">
+          <div class="team-avatar-mini">
+            <img src="assets/team-NAME.jpg" alt="Name" />
+            OR use initials: <span class="team-initials">AB</span>
+          </div>
+          <div class="team-name">Full Name</div>
+          <div class="team-role">Role / Department</div>
+        </div>
+      -->
+
+      <!-- PLACEHOLDER TEAM MEMBERS — replace with real data -->
+      <div class="team-card reveal">
+        <div class="team-avatar-mini"><span class="team-initials">?</span></div>
+        <div class="team-name">Team Member</div>
+        <div class="team-role">Add Role Here</div>
+      </div>
+      <div class="team-card reveal reveal-delay-1">
+        <div class="team-avatar-mini"><span class="team-initials">?</span></div>
+        <div class="team-name">Team Member</div>
+        <div class="team-role">Add Role Here</div>
+      </div>
+      <div class="team-card reveal reveal-delay-2">
+        <div class="team-avatar-mini"><span class="team-initials">?</span></div>
+        <div class="team-name">Team Member</div>
+        <div class="team-role">Add Role Here</div>
+      </div>
+      <div class="team-card reveal reveal-delay-3">
+        <div class="team-avatar-mini"><span class="team-initials">?</span></div>
+        <div class="team-name">Team Member</div>
+        <div class="team-role">Add Role Here</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div>
+      <div class="footer-brand">Frivaar Productions</div>
+      <div class="footer-tagline">Born on a Friday · ਫ੍ਰਿਵਾਰ ਪ੍ਰੋਡਕਸ਼ਨਜ਼</div>
+    </div>
+    <div class="footer-copy">© 2025 Frivaar Productions. All rights reserved.</div>
+  </footer>
+
+</main>
+
+<script src="js/main.js"></script>
+<script>
+  // Mukti video: build thumbnail from pasted YouTube URL, open on click (avoids embed error 153)
+  document.querySelectorAll('.mukti-video[data-youtube-url]').forEach(function (el) {
+    var url = el.getAttribute('data-youtube-url');
+    var match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([a-zA-Z0-9_-]{11})/);
+    var id = match ? match[1] : null;
+    if (id) {
+      var img = el.querySelector('.mukti-thumb');
+      // Not every video has a maxresdefault/sddefault thumbnail. YouTube doesn't
+      // error in that case — it silently returns a tiny 120x90 grey placeholder,
+      // which is what was showing up blurry. Detect that size and step down
+      // to a quality that always exists (hqdefault).
+      var qualities = ['maxresdefault', 'sddefault', 'hqdefault', 'mqdefault'];
+      var qi = 0;
+      function tryNext() {
+        if (qi >= qualities.length) return;
+        img.src = 'https://img.youtube.com/vi/' + id + '/' + qualities[qi] + '.jpg';
+        qi++;
+      }
+      img.addEventListener('load', function () {
+        if (img.naturalWidth === 120) tryNext();
+      });
+      img.addEventListener('error', tryNext);
+      tryNext();
+      el.addEventListener('click', function () {
+        window.open('https://www.youtube.com/watch?v=' + id, '_blank');
+      });
+    }
+  });
+</script>
+<style>
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</body>
+</html> 

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frivaar Productions — Born on a Friday</title>
+  <meta name="description" content="Frivaar Productions — a music & film production house from Punjab, championing new talent and Punjabi culture worldwide." />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    /* ---- HERO ---- */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+    }
+
+    .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(212, 160, 23, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212, 160, 23, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 0;
+    }
+
+    .hero-bg-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(212, 160, 23, 0.08) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      animation: breathe 6s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+      50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.7; }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 2rem;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.5s;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 12vw, 10rem);
+      font-weight: 300;
+      line-height: 0.95;
+      color: var(--cream);
+      margin: 1.5rem 0;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.8s;
+    }
+
+    .hero-title .gold-word {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream-dim);
+      letter-spacing: 0.05em;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 1.1s;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 1.4s;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 2;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 1.8s;
+    }
+
+    .hero-scroll span {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      opacity: 0.5;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(0.7); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---- TICKER ---- */
+    .ticker-wrap {
+      background: var(--gold);
+      overflow: hidden;
+      padding: 0.75rem 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .ticker-track {
+      display: flex;
+      gap: 3rem;
+      animation: tickerScroll 25s linear infinite;
+      white-space: nowrap;
+    }
+
+    .ticker-item {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--black);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .ticker-item::after {
+      content: '◆';
+      font-size: 0.4rem;
+    }
+
+    @keyframes tickerScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ---- BEHIND THE SCENES STRIP ---- */
+    .bts-section {
+      padding: 6rem 6rem;
+      background: var(--black);
+      position: relative;
+    }
+
+    .bts-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .bts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .bts-card {
+      position: relative;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      background: var(--black-3);
+      border: 1px solid rgba(212, 160, 23, 0.1);
+      cursor: none;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .bts-card:hover {
+      border-color: rgba(212, 160, 23, 0.4);
+      transform: translateY(-4px);
+    }
+
+    .bts-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+    }
+
+    .bts-card-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .bts-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.85) 0%, transparent 55%);
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .bts-card:hover .bts-card-overlay {
+      opacity: 1;
+    }
+
+    .bts-card-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cream);
+    }
+
+    /* ---- CELEB WALL ---- */
+    .celeb-section {
+      padding: 7rem 6rem;
+      background: var(--black-2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .celeb-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+
+    .celeb-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .celeb-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .celeb-card {
+      position: relative;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: var(--black-3);
+      border: 1px solid rgba(212, 160, 23, 0.12);
+      cursor: none;
+      transition: border-color 0.3s;
+    }
+
+    .celeb-card:hover {
+      border-color: rgba(212, 160, 23, 0.5);
+    }
+
+    .celeb-card iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      pointer-events: none;
+    }
+
+    .celeb-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.8) 0%, transparent 50%);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.25rem;
+      transition: opacity 0.3s;
+    }
+
+    .celeb-card:hover .celeb-card-overlay {
+      background: linear-gradient(to top, rgba(10,10,10,0.3) 0%, transparent 60%);
+    }
+
+    .celeb-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 52px;
+      height: 52px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 18px;
+      background: rgba(10,10,10,0.6);
+      backdrop-filter: blur(4px);
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .celeb-card:hover .celeb-play-btn {
+      background: var(--gold);
+      color: var(--black);
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .celeb-card-label {
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: 0.05em;
+    }
+
+    /* Click to enable video */
+    .celeb-card.active iframe {
+      pointer-events: auto;
+    }
+
+    .celeb-card.active .celeb-play-btn,
+    .celeb-card.active .celeb-card-overlay {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 900px) {
+      .bts-section, .celeb-section { padding: 5rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Page transition overlay -->
+<div class="page-transition"></div>
+
+<!-- Custom cursor -->
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<!-- ===== SIDE NAV ===== -->
+<nav class="side-nav">
+  <div class="nav-logo">
+    <img src="assets/logo.png" alt="Frivaar Productions" />
+  </div>
+  <ul class="nav-links">
+    <li>
+      <a href="index.html" class="active">
+        <i class="ti ti-home nav-icon"></i>
+        <span class="nav-label">Home</span>
+      </a>
+    </li>
+    <li>
+      <a href="story.html">
+        <i class="ti ti-book nav-icon"></i>
+        <span class="nav-label">Story</span>
+      </a>
+    </li>
+    <li>
+      <a href="work.html">
+        <i class="ti ti-vinyl nav-icon"></i>
+        <span class="nav-label">Work</span>
+      </a>
+    </li>
+    <li>
+      <a href="milestones.html">
+        <i class="ti ti-trophy nav-icon"></i>
+        <span class="nav-label">Journey</span>
+      </a>
+    </li>
+  </ul>
+  <div class="nav-socials">
+    <a href="https://www.instagram.com/fvproductions_5/" target="_blank" aria-label="Instagram">
+      <i class="ti ti-brand-instagram"></i>
+    </a>
+    <a href="https://www.youtube.com/channel/UCdWamqRiDXmN7Nq7FU97IEA" target="_blank" aria-label="YouTube">
+      <i class="ti ti-brand-youtube"></i>
+    </a>
+    <a href="#" target="_blank" aria-label="Spotify">
+      <i class="ti ti-brand-spotify"></i>
+    </a>
+  </div>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="page-wrap">
+
+  <!-- HERO -->
+  <section class="hero noise">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-bg-glow"></div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Bassi, Punjab · Est. 2020</p>
+      <h1 class="hero-title">
+        FRI<span class="gold-word">VAAR</span><br/>
+        PRODUCTIONS
+      </h1>
+      <p class="hero-tagline">Every Friday, a new story begins.</p>
+      <div class="hero-ctas">
+        <a href="work.html" class="btn-gold">
+          <span><i class="ti ti-player-play"></i> Explore Our Work</span>
+        </a>
+        <a href="story.html" class="btn-gold">
+          <span><i class="ti ti-book-2"></i> Our Story</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker-track">
+      <!-- Duplicated for seamless loop -->
+      <div class="ticker-item">Frivaar Productions</div>
+      <div class="ticker-item">Punjabi Music</div>
+      <div class="ticker-item">Cinematic Storytelling</div>
+      <div class="ticker-item">New Talent Platform</div>
+      <div class="ticker-item">International Reach</div>
+      <div class="ticker-item">Born on a Friday</div>
+      <div class="ticker-item">Bassi · Punjab · Canada</div>
+      <div class="ticker-item">ਫ੍ਰਿਵਾਰ ਪ੍ਰੋਡਕਸ਼ਨਜ਼</div>
+      <div class="ticker-item">Frivaar Productions</div>
+      <div class="ticker-item">Punjabi Music</div>
+      <div class="ticker-item">Cinematic Storytelling</div>
+      <div class="ticker-item">New Talent Platform</div>
+      <div class="ticker-item">International Reach</div>
+      <div class="ticker-item">Born on a Friday</div>
+      <div class="ticker-item">Bassi · Punjab · Canada</div>
+      <div class="ticker-item">ਫ੍ਰਿਵਾਰ ਪ੍ਰੋਡਕਸ਼ਨਜ਼</div>
+    </div>
+  </div>
+
+  <!-- BEHIND THE SCENES STRIP -->
+  <section class="bts-section">
+    <div class="bts-header">
+      <p class="eyebrow reveal">A closer look</p>
+      <div class="gold-line reveal reveal-delay-1" style="margin: 1.5rem auto;"></div>
+      <h2 class="section-heading reveal reveal-delay-1">Inside <em>Frivaar</em></h2>
+    </div>
+
+    <div class="bts-grid">
+      <!--
+        ADD BEHIND-THE-SCENES PHOTOS/CLIPS HERE.
+        Replace each placeholder card with:
+        <div class="bts-card reveal">
+          <img src="assets/your-photo.jpg" alt="Short description" />
+          <div class="bts-card-overlay">
+            <span class="bts-card-label">Caption, e.g. Studio session — Bassi</span>
+          </div>
+        </div>
+      -->
+      <div class="bts-card reveal" data-hover>
+        <div class="bts-card-placeholder">
+          <div>
+            <i class="ti ti-photo-plus" style="font-size:2.5rem;color:var(--gold-dim);"></i>
+            <p style="font-family:var(--font-mono);font-size:0.6rem;color:var(--cream-dim);letter-spacing:0.2em;margin-top:1rem;text-transform:uppercase;">Add Photo / Clip 1</p>
+          </div>
+        </div>
+      </div>
+      <div class="bts-card reveal reveal-delay-1" data-hover>
+        <div class="bts-card-placeholder">
+          <div>
+            <i class="ti ti-photo-plus" style="font-size:2.5rem;color:var(--gold-dim);"></i>
+            <p style="font-family:var(--font-mono);font-size:0.6rem;color:var(--cream-dim);letter-spacing:0.2em;margin-top:1rem;text-transform:uppercase;">Add Photo / Clip 2</p>
+          </div>
+        </div>
+      </div>
+      <div class="bts-card reveal reveal-delay-2" data-hover>
+        <div class="bts-card-placeholder">
+          <div>
+            <i class="ti ti-photo-plus" style="font-size:2.5rem;color:var(--gold-dim);"></i>
+            <p style="font-family:var(--font-mono);font-size:0.6rem;color:var(--cream-dim);letter-spacing:0.2em;margin-top:1rem;text-transform:uppercase;">Add Photo / Clip 3</p>
+          </div>
+        </div>
+      </div>
+      <div class="bts-card reveal reveal-delay-3" data-hover>
+        <div class="bts-card-placeholder">
+          <div>
+            <i class="ti ti-photo-plus" style="font-size:2.5rem;color:var(--gold-dim);"></i>
+            <p style="font-family:var(--font-mono);font-size:0.6rem;color:var(--cream-dim);letter-spacing:0.2em;margin-top:1rem;text-transform:uppercase;">Add Photo / Clip 4</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CELEB WALL -->
+  <section class="celeb-section">
+    <div class="celeb-header">
+      <p class="eyebrow reveal">Voices of support</p>
+      <div class="gold-line reveal reveal-delay-1" style="margin: 1.5rem auto;"></div>
+      <h2 class="section-heading reveal reveal-delay-1">
+        They believe in <em>Frivaar</em>
+      </h2>
+    </div>
+
+    <div class="celeb-grid">
+      <!--
+        ADD CELEB VIDEO CARDS HERE.
+        Replace the src URLs with your actual celebrity clip YouTube embeds.
+        Format: https://www.youtube.com/embed/VIDEO_ID
+
+        Example card:
+        <div class="celeb-card reveal">
+          <img src="https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg"
+               style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" alt="Celebrity Name" />
+          <div class="celeb-card-overlay">
+            <span class="celeb-card-label">Celebrity Name</span>
+          </div>
+          <div class="celeb-play-btn">
+            <i class="ti ti-player-play-filled"></i>
+          </div>
+        </div>
+      -->
+
+      <!-- PLACEHOLDER CARDS — replace with real celeb clips -->
+      <div class="celeb-card reveal" data-hover style="display:flex;align-items:center;justify-content:center;">
+        <div style="text-align:center;padding:2rem;">
+          <i class="ti ti-video-plus" style="font-size:2.5rem;color:var(--gold-dim);"></i>
+          <p style="font-family:var(--font-mono);font-size:0.6rem;color:var(--cream-dim);letter-spacing:0.2em;margin-top:1rem;text-transform:uppercase;">Add Celebrity Clip 1</p>
+          <p style="font-family:var(--font-ui);font-size:0.75rem;color:var(--cream-dim);opacity:0.5;margin-top:0.5rem;">Paste YouTube link in the HTML</p>
+        </div>
+      </div>
+      <div class="celeb-card reveal reveal-delay-1" data-hover style="display:flex;align-items:center;justify-content:center;">
+        <div style="text-align:center;padding:2rem;">
+          <i class="ti ti-video-plus" style="font-size:2.5rem;color:var(--gold-dim);"></i>
+          <p style="font-family:var(--font-mono);font-size:0.6rem;color:var(--cream-dim);letter-spacing:0.2em;margin-top:1rem;text-transform:uppercase;">Add Celebrity Clip 2</p>
+          <p style="font-family:var(--font-ui);font-size:0.75rem;color:var(--cream-dim);opacity:0.5;margin-top:0.5rem;">Paste YouTube link in the HTML</p>
+        </div>
+      </div>
+      <div class="celeb-card reveal reveal-delay-2" data-hover style="display:flex;align-items:center;justify-content:center;">
+        <div style="text-align:center;padding:2rem;">
+          <i class="ti ti-video-plus" style="font-size:2.5rem;color:var(--gold-dim);"></i>
+          <p style="font-family:var(--font-mono);font-size:0.6rem;color:var(--cream-dim);letter-spacing:0.2em;margin-top:1rem;text-transform:uppercase;">Add Celebrity Clip 3</p>
+          <p style="font-family:var(--font-ui);font-size:0.75rem;color:var(--cream-dim);opacity:0.5;margin-top:0.5rem;">Paste YouTube link in the HTML</p>
+        </div>
+      </div>
+    </div>
+    <p style="font-family:var(--font-mono);font-size:0.6rem;color:var(--cream-dim);opacity:0.4;text-align:center;margin-top:2rem;letter-spacing:0.15em;">
+      → To add clips: replace placeholder cards with the example card format in the HTML comments above
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div>
+      <div class="footer-brand">Frivaar Productions</div>
+      <div class="footer-tagline">Born on a Friday · ਫ੍ਰਿਵਾਰ ਪ੍ਰੋਡਕਸ਼ਨਜ਼</div>
+    </div>
+    <div class="footer-copy">© 2025 Frivaar Productions. All rights reserved.</div>
+  </footer>
+
+</main>
+
+<script src="js/main.js"></script>
+<script>
+  // Celeb card click to play
+  document.querySelectorAll('.celeb-card').forEach(card => {
+    card.addEventListener('click', () => {
+      card.classList.toggle('active');
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Work — Frivaar Productions</title>
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+
+    /* =============================================
+       WORK PAGE — Full Redesign
+    ============================================= */
+
+    .work-page {
+      background: #07070a;
+      min-height: 100vh;
+    }
+
+    /* ---- HERO / PLAYER STAGE ---- */
+    .player-stage {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 480px;
+      align-items: center;
+      gap: 0;
+      padding: 0 5rem 0 3rem;
+      background: #07070a;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Ambient circle glow */
+    .player-stage::after {
+      content: '';
+      position: absolute;
+      right: 80px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,160,23,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* ---- LEFT: INFO PANEL ---- */
+    .info-panel {
+      padding: 2rem 0;
+      z-index: 2;
+    }
+
+    .info-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      letter-spacing: 0.45em;
+      color: rgba(212,160,23,0.55);
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+    }
+
+    .info-idle-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 200;
+      color: rgba(220,210,190,0.18);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+      transition: opacity 0.4s;
+    }
+
+    .now-playing.active ~ .info-idle-title,
+    .info-idle-title.hidden { opacity: 0; pointer-events: none; }
+
+    /* Track details — hidden until playing */
+    .track-details {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.55s, transform 0.55s;
+      pointer-events: none;
+      position: absolute;
+    }
+
+    .now-playing.active .track-details {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+      position: relative;
+    }
+
+    .track-now-label {
+      font-family: var(--font-mono);
+      font-size: 0.48rem;
+      letter-spacing: 0.4em;
+      color: rgba(212,160,23,0.6);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .track-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      color: #e8e0d0;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+    }
+
+    .track-artist {
+      font-family: var(--font-ui);
+      font-size: 0.82rem;
+      color: rgba(220,210,190,0.45);
+      letter-spacing: 0.08em;
+      margin-bottom: 1.6rem;
+    }
+
+    .track-year {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      letter-spacing: 0.22em;
+      color: rgba(212,160,23,0.4);
+      text-transform: uppercase;
+      border: 1px solid rgba(212,160,23,0.18);
+      padding: 0.3em 0.8em;
+      border-radius: 2px;
+    }
+
+    /* Waveform bars */
+    .waveform {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 28px;
+      margin-top: 2rem;
+      opacity: 0;
+      transition: opacity 0.4s 0.3s;
+    }
+
+    .now-playing.active .waveform { opacity: 1; }
+
+    .w-bar {
+      width: 3px;
+      border-radius: 2px;
+      background: rgba(212,160,23,0.65);
+      height: 6px;
+    }
+
+    .now-playing.active .w-bar:nth-child(1) { animation: wb 1.0s ease-in-out infinite 0.00s; }
+    .now-playing.active .w-bar:nth-child(2) { animation: wb 1.0s ease-in-out infinite 0.14s; }
+    .now-playing.active .w-bar:nth-child(3) { animation: wb 1.0s ease-in-out infinite 0.28s; }
+    .now-playing.active .w-bar:nth-child(4) { animation: wb 1.0s ease-in-out infinite 0.08s; }
+    .now-playing.active .w-bar:nth-child(5) { animation: wb 1.0s ease-in-out infinite 0.20s; }
+    .now-playing.active .w-bar:nth-child(6) { animation: wb 1.0s ease-in-out infinite 0.35s; }
+    .now-playing.active .w-bar:nth-child(7) { animation: wb 1.0s ease-in-out infinite 0.05s; }
+    .now-playing.active .w-bar:nth-child(8) { animation: wb 1.0s ease-in-out infinite 0.18s; }
+
+    @keyframes wb {
+      0%,100% { height: 4px; opacity: 0.4; }
+      50% { height: 24px; opacity: 1; }
+    }
+
+    .idle-hint {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.28em;
+      color: rgba(220,210,190,0.2);
+      text-transform: uppercase;
+      margin-top: 3rem;
+      transition: opacity 0.4s;
+    }
+
+    .now-playing.active .idle-hint { opacity: 0; }
+
+    /* ---- RIGHT: SVG TURNTABLE ---- */
+    .turntable-svg-wrap {
+      position: relative;
+      width: 460px;
+      height: 460px;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    #turntableSVG {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    /* Platter spin animation — applied via JS class */
+    #vinylGroup {
+      transform-origin: 190px 190px;
+      transform-box: fill-box;
+    }
+
+    #vinylGroup.spinning { animation: svgSpin 8s linear infinite; }
+#vinylGroup { animation: svgSpin 8s linear infinite; }
+
+    /* Label text always spins independently */
+    #labelTextGroup {
+      transform-origin: 210px 230px;
+      transform-box: fill-box;
+      animation: svgSpin 8s linear infinite;
+    }
+
+    @keyframes svgSpin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* Tonearm rotate */
+    #tonearmGroup {
+      transform-origin: 360px 85px;
+      transform-box: fill-box;
+      transition: transform 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform: rotate(-22deg);
+    }
+
+    #tonearmGroup.playing {
+      transform: rotate(0deg);
+    }
+
+    /* ---- SONG CARD EXPANDED MODAL ---- */
+    .card-modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.82);
+      backdrop-filter: blur(6px);
+      z-index: 9998;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s;
+    }
+    .card-modal-overlay.open { opacity: 1; pointer-events: auto; }
+
+    .card-modal {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(0.92);
+      width: min(480px, 92vw);
+      background: #0f0f12;
+      border: 1px solid rgba(212,160,23,0.28);
+      border-radius: 10px;
+      overflow: hidden;
+      z-index: 9999;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.95);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s, transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .card-modal.open {
+      opacity: 1; pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .modal-thumb {
+      width: 100%; aspect-ratio: 16/9;
+      position: relative; overflow: hidden; background: #000;
+    }
+    .modal-thumb img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block; opacity: 0.9;
+    }
+    .modal-thumb-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.75) 100%);
+    }
+
+    .modal-body {
+      padding: 1.4rem 1.5rem 1.6rem;
+      display: flex; flex-direction: column; gap: 1.1rem;
+    }
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 3vw, 1.7rem);
+      font-weight: 300; color: #e8e0d0; line-height: 1.15;
+    }
+    .modal-artist {
+      font-family: var(--font-ui);
+      font-size: 0.72rem; color: rgba(210,200,175,0.45);
+      letter-spacing: 0.05em; margin-top: -0.7rem;
+    }
+    .modal-year {
+      display: inline-block;
+      font-family: var(--font-mono); font-size: 0.45rem;
+      letter-spacing: 0.22em; color: rgba(212,160,23,0.5);
+      border: 1px solid rgba(212,160,23,0.18);
+      padding: 0.28em 0.75em; border-radius: 2px;
+    }
+    .modal-yt-btn {
+      display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+      background: #d4a017; color: #000;
+      font-family: var(--font-mono); font-size: 0.58rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.85em 1.4em; border-radius: 4px;
+      font-weight: 700;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .modal-yt-btn:hover { background: #e8b820; transform: translateY(-1px); }
+    .modal-yt-btn i { font-size: 1rem; }
+
+    .modal-close {
+      position: absolute; top: 10px; right: 10px;
+      width: 28px; height: 28px;
+      background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 11px; cursor: pointer; z-index: 10;
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: rgba(212,160,23,0.7); color: #000; }
+
+    /* ---- CATALOG SECTION ---- */
+    .catalog-section {
+      background: #09090c;
+      border-top: 1px solid rgba(212,160,23,0.07);
+      padding: 5rem 4rem 8rem;
+    }
+    .catalog-header { text-align: center; margin-bottom: 3.5rem; }
+
+    /* ---- SONG CARDS GRID ---- */
+    .records-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .song-card {
+      position: relative;
+      background: #0f0f12;
+      border: 1px solid rgba(255,255,255,0.055);
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.28s cubic-bezier(0.25,0.46,0.45,0.94),
+                  border-color 0.28s, box-shadow 0.28s;
+    }
+    .song-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(212,160,23,0.28);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.55), 0 0 0 1px rgba(212,160,23,0.08);
+    }
+    .song-card.playing {
+      border-color: rgba(212,160,23,0.6);
+      box-shadow: 0 0 0 1px rgba(212,160,23,0.22), 0 12px 36px rgba(212,160,23,0.14);
+      transform: translateY(-4px);
+    }
+
+    /* Thumbnail */
+    .song-thumb {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+    .song-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.3s;
+      opacity: 0.78;
+    }
+    .song-card:hover .song-thumb img { transform: scale(1.03); opacity: 0.95; }
+    .song-card.playing .song-thumb img { opacity: 1; }
+
+    /* Bottom gradient on thumb */
+    .song-thumb::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 45%, rgba(0,0,0,0.6) 100%);
+      pointer-events: none;
+    }
+
+    /* Year badge */
+    .song-year {
+      position: absolute; top: 8px; left: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.42rem; letter-spacing: 0.2em;
+      color: rgba(212,160,23,0.95);
+      background: rgba(0,0,0,0.7);
+      border: 1px solid rgba(212,160,23,0.22);
+      padding: 0.22em 0.6em; border-radius: 2px; z-index: 2;
+    }
+
+    /* Play/pause button overlay */
+    .song-play-overlay {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 3;
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .song-card:hover .song-play-overlay { opacity: 1; }
+    .song-card.playing .song-play-overlay { opacity: 1; }
+
+    .song-play-circle {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: rgba(212,160,23,0.9);
+      display: flex; align-items: center; justify-content: center;
+      color: #000; font-size: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.65);
+      transition: transform 0.2s, background 0.2s;
+      backdrop-filter: blur(4px);
+    }
+    .song-card:hover .song-play-circle { transform: scale(1.08); }
+    .song-card.playing .song-play-circle { background: #fff; }
+
+    /* Waveform badge (playing state) */
+    .song-wave {
+      position: absolute; top: 8px; right: 8px;
+      display: flex; align-items: flex-end; gap: 2px;
+      height: 16px; z-index: 4;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .song-card.playing .song-wave { opacity: 1; }
+    .s-bar {
+      width: 2.5px; border-radius: 2px;
+      background: #d4a017; height: 4px;
+    }
+    .song-card.playing .s-bar:nth-child(1) { animation: swb 0.9s ease-in-out infinite 0.00s; }
+    .song-card.playing .s-bar:nth-child(2) { animation: swb 0.9s ease-in-out infinite 0.15s; }
+    .song-card.playing .s-bar:nth-child(3) { animation: swb 0.9s ease-in-out infinite 0.30s; }
+    .song-card.playing .s-bar:nth-child(4) { animation: swb 0.9s ease-in-out infinite 0.10s; }
+    .song-card.playing .s-bar:nth-child(5) { animation: swb 0.9s ease-in-out infinite 0.22s; }
+    @keyframes swb {
+      0%,100% { height: 3px; opacity: 0.5; }
+      50% { height: 14px; opacity: 1; }
+    }
+
+    /* Card footer info */
+    .song-info {
+      padding: 0.8rem 1rem 0.9rem;
+      display: flex; align-items: center; gap: 0.75rem;
+      position: relative;
+    }
+
+    /* Left accent bar (active) */
+    .song-info::before {
+      content: '';
+      position: absolute; left: 0; top: 0.6rem; bottom: 0.6rem;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, rgba(212,160,23,0.55), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .song-card.playing .song-info::before { opacity: 1; }
+
+    .song-text { flex: 1; min-width: 0; }
+
+    .song-title {
+      font-family: var(--font-display);
+      font-size: 0.93rem; font-weight: 400; color: #e0d8c8;
+      line-height: 1.25; margin-bottom: 0.22rem;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .song-artist {
+      font-family: var(--font-ui);
+      font-size: 0.63rem; color: rgba(210,200,175,0.38);
+      letter-spacing: 0.025em;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    /* YT link icon */
+    .song-yt-link {
+      flex-shrink: 0;
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 1px solid rgba(212,160,23,0.15);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(212,160,23,0.4); font-size: 13px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .song-yt-link:hover {
+      border-color: rgba(212,160,23,0.55);
+      color: #d4a017;
+      background: rgba(212,160,23,0.06);
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 1000px) {
+      .player-stage {
+        grid-template-columns: 1fr; justify-items: center;
+        padding: 4rem 2rem 2rem; gap: 2rem; min-height: auto;
+      }
+      .turntable-svg-wrap { width: 320px; height: 320px; }
+      .catalog-section { padding: 3rem 1.5rem 6rem; }
+      .records-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+      .yt-wrap { width: 260px; }
+    }
+    .work-title{
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 270;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: #e8e0d0;
+    margin-bottom: 1rem;
+    transition: opacity .4s;
+}
+
+  .work-title em{
+      color:#d4a017;
+      font-style:italic;
+      font-weight:270;
+  }
+
+  .now-playing.active .work-title{
+      opacity:0;
+      pointer-events:none;
+  }
+
+  </style>
+</head>
+<body>
+
+<div class="page-transition"></div>
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<!-- ===== SIDE NAV ===== -->
+<nav class="side-nav">
+  <div class="nav-logo"><img src="assets/logo.png" alt="Frivaar Productions" /></div>
+  <ul class="nav-links">
+    <li><a href="index.html"><i class="ti ti-home nav-icon"></i><span class="nav-label">Home</span></a></li>
+    <li><a href="story.html"><i class="ti ti-book nav-icon"></i><span class="nav-label">Story</span></a></li>
+    <li><a href="work.html" class="active"><i class="ti ti-vinyl nav-icon"></i><span class="nav-label">Work</span></a></li>
+    <li><a href="milestones.html"><i class="ti ti-trophy nav-icon"></i><span class="nav-label">Journey</span></a></li>
+  </ul>
+  <div class="nav-socials">
+    <a href="https://www.instagram.com/fvproductions_5/" target="_blank"><i class="ti ti-brand-instagram"></i></a>
+    <a href="https://www.youtube.com/channel/UCdWamqRiDXmN7Nq7FU97IEA" target="_blank"><i class="ti ti-brand-youtube"></i></a>
+    <a href="#" target="_blank"><i class="ti ti-brand-spotify"></i></a>
+  </div>
+</nav>
+
+<main class="page-wrap work-page">
+
+  <!-- ===== HERO STAGE ===== -->
+  <div class="player-stage">
+
+   <!-- LEFT: Info -->
+    <div class="info-panel">
+
+      <p class="info-eyebrow">
+        Frivaar Productions · Portfolio
+      </p>
+
+      <div class="now-playing" id="nowPlaying">
+
+        <!-- Idle state -->
+        <h1 class="work-title" id="idleTitle">
+          Every Frame.<br>
+          Every Beat.<br>
+          Every <em>Story.</em>
+        </h1>
+
+        <!-- Playing state -->
+        <div class="track-details" id="trackDetails">
+          <p class="track-title" id="npTitle"></p>
+          <p class="track-artist" id="npArtist"></p>
+          <span class="track-year" id="npYear"></span>
+        </div>
+
+        <!-- Waveform -->
+        <div class="waveform">
+          <div class="w-bar"></div><div class="w-bar"></div>
+          <div class="w-bar"></div><div class="w-bar"></div>
+          <div class="w-bar"></div><div class="w-bar"></div>
+          <div class="w-bar"></div><div class="w-bar"></div>
+        </div>
+
+        <p class="idle-hint">
+          ↓ Browse the collection
+        </p>
+
+      </div>
+
+    </div>
+    <!-- RIGHT: Turntable SVG -->
+    <div class="turntable-svg-wrap">
+      <svg id="turntableSVG" viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <!-- Wood grain cabinet fill -->
+          <linearGradient id="woodGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"  stop-color="#2d2010"/>
+            <stop offset="35%" stop-color="#1e1408"/>
+            <stop offset="70%" stop-color="#261a0c"/>
+            <stop offset="100%" stop-color="#181008"/>
+          </linearGradient>
+
+          <!-- Metal bottom strip -->
+          <linearGradient id="metalStrip" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1e1e1e"/>
+            <stop offset="100%" stop-color="#111"/>
+          </linearGradient>
+
+          <!-- Platter brushed metal radial -->
+          <radialGradient id="platterGrad" cx="45%" cy="40%" r="60%">
+            <stop offset="0%"  stop-color="#2e2e2e"/>
+            <stop offset="50%" stop-color="#1c1c1c"/>
+            <stop offset="100%" stop-color="#101010"/>
+          </radialGradient>
+
+          <!-- Vinyl disc surface -->
+          <radialGradient id="vinylGrad" cx="38%" cy="32%" r="65%">
+            <stop offset="0%"  stop-color="#282828"/>
+            <stop offset="30%" stop-color="#111"/>
+            <stop offset="70%" stop-color="#060606"/>
+            <stop offset="100%" stop-color="#0e0e0e"/>
+          </radialGradient>
+
+          <!-- Gold label gradient -->
+          <radialGradient id="labelGrad" cx="38%" cy="32%" r="65%">
+            <stop offset="0%"  stop-color="#f2cb4e"/>
+            <stop offset="45%" stop-color="#d4a017"/>
+            <stop offset="80%" stop-color="#a07012"/>
+            <stop offset="100%" stop-color="#7a5508"/>
+          </radialGradient>
+
+          <!-- Tonearm silver -->
+          <linearGradient id="armGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"   stop-color="#444"/>
+            <stop offset="25%"  stop-color="#bbb"/>
+            <stop offset="50%"  stop-color="#d8d8d8"/>
+            <stop offset="75%"  stop-color="#888"/>
+            <stop offset="100%" stop-color="#444"/>
+          </linearGradient>
+
+          <!-- Pivot gold -->
+          <radialGradient id="pivotGrad" cx="38%" cy="32%" r="60%">
+            <stop offset="0%"  stop-color="#e8c44a"/>
+            <stop offset="55%" stop-color="#c49020"/>
+            <stop offset="100%" stop-color="#8a6010"/>
+          </radialGradient>
+
+          <!-- Circular text path: runs along r=54 circle inside the label (r=62) -->
+          <path id="labelCirclePath"
+        d="M210,230
+          m-100,0
+          a100,100 0 1,1 200,0
+          a100,100 0 1,1 -200,0"/>
+
+          <!-- Groove mask: ring between inner edge and outer edge -->
+          <mask id="grooveMask">
+            <rect width="460" height="460" fill="black"/>
+            <!-- show ring 28%–94% radius from center 230,230; radius=210 => 58.8 to 196.56 -->
+            <circle cx="230" cy="230" r="197" fill="white"/>
+            <circle cx="230" cy="230" r="60" fill="black"/>
+          </mask>
+
+          <!-- Sheen conic overlay -->
+          <filter id="sheenFilter">
+            <feBlend mode="screen"/>
+          </filter>
+
+          <!-- Cabinet shadow -->
+          <filter id="cabinetShadow" x="-10%" y="-10%" width="120%" height="130%">
+            <feDropShadow dx="0" dy="20" stdDeviation="20" flood-color="rgba(0,0,0,0.9)" flood-opacity="1"/>
+          </filter>
+        </defs>
+
+        <!-- ===== CABINET BODY ===== -->
+        <g filter="url(#cabinetShadow)">
+          <!-- Main wood rectangle -->
+          <rect x="10" y="60" width="420" height="360" rx="8" ry="8" fill="url(#woodGrad)"/>
+          <!-- Top edge gold highlight -->
+          <rect x="10" y="60" width="420" height="2" rx="2" fill="rgba(212,160,23,0.35)"/>
+          <!-- Wood grain lines -->
+          <line x1="60"  y1="60" x2="60"  y2="420" stroke="rgba(255,255,255,0.012)" stroke-width="1"/>
+          <line x1="100" y1="60" x2="100" y2="420" stroke="rgba(255,255,255,0.010)" stroke-width="1"/>
+          <line x1="145" y1="60" x2="145" y2="420" stroke="rgba(255,255,255,0.014)" stroke-width="1"/>
+          <line x1="200" y1="60" x2="200" y2="420" stroke="rgba(255,255,255,0.008)" stroke-width="1"/>
+          <line x1="260" y1="60" x2="260" y2="420" stroke="rgba(255,255,255,0.012)" stroke-width="1"/>
+          <line x1="310" y1="60" x2="310" y2="420" stroke="rgba(255,255,255,0.010)" stroke-width="1"/>
+          <line x1="355" y1="60" x2="355" y2="420" stroke="rgba(255,255,255,0.013)" stroke-width="1"/>
+          <line x1="400" y1="60" x2="400" y2="420" stroke="rgba(255,255,255,0.009)" stroke-width="1"/>
+          <!-- Bottom metal strip -->
+          <rect x="10" y="388" width="420" height="32" rx="0" fill="url(#metalStrip)"/>
+          <rect x="10" y="388" width="420" height="1" fill="rgba(212,160,23,0.12)"/>
+          <rect x="10" y="418" width="420" height="2" rx="2" fill="rgba(0,0,0,0.5)"/>
+          <!-- Cabinet border -->
+          <rect x="10" y="60" width="420" height="360" rx="8" ry="8" fill="none" stroke="rgba(180,120,40,0.28)" stroke-width="1"/>
+        </g>
+
+        <!-- ===== PLATTER WELL (recessed ring) ===== -->
+        <circle cx="210" cy="230" r="214" fill="rgba(0,0,0,0.5)"/>
+        <circle cx="210" cy="230" r="210" fill="#0c0c0c"/>
+        <circle cx="210" cy="230" r="208" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+
+        <!-- ===== BRUSHED METAL PLATTER ===== -->
+        <circle cx="210" cy="230" r="200" fill="url(#platterGrad)"/>
+        <!-- Radial brush marks -->
+        <circle cx="210" cy="230" r="200" fill="none" stroke="rgba(255,255,255,0.018)" stroke-width="2" stroke-dasharray="4 6"/>
+        <circle cx="210" cy="230" r="175" fill="none" stroke="rgba(255,255,255,0.012)" stroke-width="1" stroke-dasharray="3 5"/>
+
+        <!-- ===== VINYL RECORD GROUP (spins) ===== -->
+        <g id="vinylGroup">
+          <!-- Vinyl surface -->
+          <circle cx="210" cy="230" r="192" fill="url(#vinylGrad)"/>
+
+          <!-- Groove rings (masked to groove area only) -->
+          <g mask="url(#grooveMask)">
+            <circle cx="210" cy="230" r="185" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="0.8"/>
+            <circle cx="210" cy="230" r="180" fill="none" stroke="rgba(255,255,255,0.018)" stroke-width="0.6"/>
+            <circle cx="210" cy="230" r="175" fill="none" stroke="rgba(255,255,255,0.022)" stroke-width="0.8"/>
+            <circle cx="210" cy="230" r="170" fill="none" stroke="rgba(255,255,255,0.016)" stroke-width="0.6"/>
+            <circle cx="210" cy="230" r="165" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="0.8"/>
+            <circle cx="210" cy="230" r="160" fill="none" stroke="rgba(255,255,255,0.015)" stroke-width="0.6"/>
+            <circle cx="210" cy="230" r="155" fill="none" stroke="rgba(255,255,255,0.022)" stroke-width="0.8"/>
+            <circle cx="210" cy="230" r="150" fill="none" stroke="rgba(255,255,255,0.018)" stroke-width="0.6"/>
+            <circle cx="210" cy="230" r="145" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="0.8"/>
+            <circle cx="210" cy="230" r="140" fill="none" stroke="rgba(255,255,255,0.015)" stroke-width="0.6"/>
+            <circle cx="210" cy="230" r="135" fill="none" stroke="rgba(255,255,255,0.022)" stroke-width="0.8"/>
+            <circle cx="210" cy="230" r="130" fill="none" stroke="rgba(255,255,255,0.016)" stroke-width="0.6"/>
+            <circle cx="210" cy="230" r="125" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="0.8"/>
+            <circle cx="210" cy="230" r="120" fill="none" stroke="rgba(255,255,255,0.018)" stroke-width="0.6"/>
+            <circle cx="210" cy="230" r="115" fill="none" stroke="rgba(255,255,255,0.022)" stroke-width="0.8"/>
+            <circle cx="210" cy="230" r="110" fill="none" stroke="rgba(255,255,255,0.015)" stroke-width="0.6"/>
+            <circle cx="210" cy="230" r="105" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="0.8"/>
+            <circle cx="210" cy="230" r="100" fill="none" stroke="rgba(255,255,255,0.018)" stroke-width="0.6"/>
+            <circle cx="210" cy="230" r="95" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="0.8"/>
+            <circle cx="210" cy="230" r="90" fill="none" stroke="rgba(255,255,255,0.016)" stroke-width="0.6"/>
+            <circle cx="210" cy="230" r="85" fill="none" stroke="rgba(255,255,255,0.022)" stroke-width="0.8"/>
+            <circle cx="210" cy="230" r="80" fill="none" stroke="rgba(255,255,255,0.018)" stroke-width="0.6"/>
+            <circle cx="210" cy="230" r="75" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="0.8"/>
+            <circle cx="210" cy="230" r="70" fill="none" stroke="rgba(255,255,255,0.015)" stroke-width="0.6"/>
+            <circle cx="210" cy="230" r="65" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="0.8"/>
+          </g>
+
+          <!-- Light sheen sweep -->
+          <ellipse cx="155" cy="160" rx="110" ry="80" fill="rgba(255,255,255,0.022)" transform="rotate(-30,155,160)"/>
+          <ellipse cx="270" cy="305" rx="70" ry="50" fill="rgba(255,255,255,0.014)" transform="rotate(-30,270,305)"/>
+
+          <!-- Center label -->
+          <circle cx="210" cy="230" r="62" fill="url(#labelGrad)"/>
+          <!-- Label paper lines texture -->
+          <circle cx="210" cy="230" r="62" fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="3" stroke-dasharray="1 4"/>
+          <circle cx="210" cy="230" r="56" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="1"/>
+          <!-- Circular FRIVAAR text — runs along the outer edge of the label -->
+       <text
+            fill="#d4a017"
+            font-family="Instrument Serif, serif"
+            font-style="italic"
+            font-weight="500"
+            letter-spacing="3"
+            font-size="21">
+
+            <textPath
+                href="#labelCirclePath"
+                startOffset="0%">
+
+                FRIVAAR PRODUCTIONS • FRIVAAR PRODUCTIONS •
+
+            </textPath>
+
+        </text>
+          <!-- Dynamic label lines -->
+          <text x="210" y="226" text-anchor="middle" font-family="monospace" font-size="5" font-weight="500"
+                fill="rgba(0,0,0,0.38)" letter-spacing="1" id="svgLabelLine1">PRODUCTIONS</text>
+          <text x="210" y="236" text-anchor="middle" font-family="monospace" font-size="4" font-weight="400"
+                fill="rgba(0,0,0,0.28)" letter-spacing="1" id="svgLabelLine2">SELECT A TRACK</text>
+
+          <!-- Spindle hole -->
+          <circle cx="210" cy="230" r="7" fill="#050505"/>
+          <circle cx="210" cy="230" r="6" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        </g>
+
+        <!-- ===== TONEARM GROUP ===== -->
+        <g id="tonearmGroup">
+          <!-- Arm body — slightly angled rod -->
+          <line x1="360" y1="85" x2="248" y2="268"
+                stroke="url(#armGrad)" stroke-width="5" stroke-linecap="round"/>
+          <!-- Arm highlight -->
+          <line x1="360" y1="85" x2="248" y2="268"
+                stroke="rgba(255,255,255,0.08)" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Headshell -->
+          <rect x="236" y="260" width="24" height="16" rx="3" fill="#444"/>
+          <rect x="236" y="260" width="24" height="16" rx="3" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+          <!-- Stylus needle -->
+          <line x1="248" y1="276" x2="248" y2="288" stroke="#bbb" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="248" cy="289" r="2" fill="#d4a017" opacity="0.7"/>
+          <!-- Pivot cap -->
+          <circle cx="360" cy="85" r="14" fill="url(#pivotGrad)"/>
+          <circle cx="360" cy="85" r="10" fill="rgba(0,0,0,0.2)"/>
+          <circle cx="360" cy="85" r="5"  fill="#111"/>
+          <circle cx="357" cy="82" r="2"  fill="rgba(255,255,255,0.2)"/>
+          <!-- Counter-weight on back end -->
+          <rect x="366" y="76" width="30" height="18" rx="4" fill="#333"/>
+          <rect x="366" y="76" width="30" height="18" rx="4" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        </g>
+
+        <!-- ===== CONTROL KNOBS on cabinet bottom ===== -->
+        <!-- Speed LED -->
+        <circle cx="300" cy="405" r="4" fill="rgba(212,160,23,0.25)" id="svgLed"/>
+        <circle cx="300" cy="405" r="2.5" fill="#d4a017" id="svgLedInner" opacity="0.4"/>
+        <!-- Knobs -->
+        <circle cx="330" cy="405" r="7" fill="#222"/>
+        <circle cx="330" cy="405" r="7" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        <line x1="330" y1="399" x2="330" y2="403" stroke="rgba(212,160,23,0.6)" stroke-width="1.5" stroke-linecap="round"/>
+
+        <circle cx="355" cy="405" r="9" fill="#222"/>
+        <circle cx="355" cy="405" r="9" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        <line x1="355" y1="397" x2="355" y2="402" stroke="rgba(212,160,23,0.6)" stroke-width="1.5" stroke-linecap="round"/>
+
+        <circle cx="383" cy="405" r="7" fill="#222"/>
+        <circle cx="383" cy="405" r="7" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        <line x1="383" y1="399" x2="383" y2="403" stroke="rgba(212,160,23,0.6)" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ===== CATALOG ===== -->
+  <section class="catalog-section">
+    <div class="catalog-header">
+      <p class="eyebrow">The Full Catalog</p>
+      <div class="gold-line" style="margin: 1.25rem auto;"></div>
+      <h2 class="section-heading">Pick a <em>record</em></h2>
+      <p class="catalog-intro"></p>
+    </div>
+    <div class="records-grid" id="recordsGrid"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div>
+      <div class="footer-brand">Frivaar Productions</div>
+      <div class="footer-tagline">Born on a Friday · ਫ੍ਰਿਵਾਰ ਪ੍ਰੋਡਕਸ਼ਨਜ਼</div>
+    </div>
+    <div class="footer-copy">© 2025 Frivaar Productions. All rights reserved.</div>
+  </footer>
+
+</main>
+
+<script src="js/main.js"></script>
+<script>
+/* =============================================
+   TRACKS DATA
+============================================= */
+const tracks = [
+  // 2026
+  { id: '30GQchfD9LE', title: 'Yaad',               artist: 'Billa Kharoura · The Masterz',          year: '2026' },
+  { id: 'Kf1IE7YSVFw', title: 'Candle Dinner',      artist: 'Sabi Yara · Gaganvir',                  year: '2026' },
+
+  // 2025
+  { id: 'SicAyTVJIXQ', title: 'Amli Di Chah',       artist: 'Raman Rana · Purvi Kaur',               year: '2025' },
+  { id: 'solNWVj3b6w', title: 'Jazbati',            artist: 'Amarinder',                             year: '2025' },
+  { id: '_0enLMVAIFg', title: 'Glock',              artist: 'Inderjit Ramgahria · Zorawerr',         year: '2025' },
+  { id: 'gJn_XcB11Qc', title: 'Haryana Te Punjab',  artist: 'Bhallwaan · Shxkil · Rana Meet',        year: '2025' },
+
+  // 2024
+  { id: 'Q1hY_jHZw7Y', title: 'Door',               artist: 'Inderjit Ramgahria',                    year: '2024' },
+  { id: 'LuFvKAfySBw', title: '2 Numbari',          artist: 'Babbi Deol',                            year: '2024' },
+  { id: '-1kWG4kl9-s', title: 'Raahan',            artist: 'Inderjit Ramgahria',                    year: '2024' },
+  { id: 'dsAeSsTQy_8', title: 'Sun Mahiya',         artist: 'Shahid Mallya',                         year: '2024' },
+  { id: 'c2ohoFsZnp0', title: 'Khabran',            artist: 'Rabbi Maan · Kaur Gagan',               year: '2024' },
+  { id: 'aI-YK3flnc4', title: 'Na Billo',           artist: 'Harry Kahlon · G Noor',                 year: '2024' },
+  { id: 'dfZ2DA94c8I', title: 'Safar',              artist: 'Inderjit Ramgahria',                    year: '2024' },
+
+  // 2023
+  { id: '2F-eU5TkMY8', title: 'White Gold',         artist: 'Rabbi Maan · Harf Kaur',                year: '2023' },
+  { id: 'UygLUFYxcdc', title: 'Trample',           artist: 'Inderjit Ramgahria',                    year: '2023' },
+  { id: '3jBz4SQO61k', title: 'No No No',           artist: 'Yugal Parmar',                          year: '2023' },
+  { id: 'm3P3A8r4G8U', title: 'Mukam',              artist: 'Inderjit Ramgahria',                    year: '2023' },
+  { id: 'toQWIDDvCNs', title: 'Jaro Jaro',          artist: 'Gopi Longia',                           year: '2023' },
+  { id: '_Ep4xPFp-wI', title: 'Challa Challi',      artist: 'Lavvi Badesha',                         year: '2023' },
+  { id: '7zvJbJYscLQ', title: 'Dream',              artist: 'The Bhamrah',                           year: '2023' },
+  { id: 'gZ7pg_O-eqM', title: 'Law Breaker',        artist: 'Inderjit Ramgahria',                    year: '2023' },
+
+  // 2022
+  { id: 'FJc7oETmhfM', title: 'Powered by Jatt',    artist: 'Gun Vir · Harry Kahlon',                year: '2022' },
+  { id: 'hZRET2f5XRk', title: 'Dimaag Jatt Da',     artist: 'Rabbi Maan',                            year: '2022' },
+  { id: 'exRet9SCh5o', title: 'Jhukega Nahi Saala', artist: 'Jim Virr · Harry Kahlon',               year: '2022' },
+  { id: 'kCqkC-3Ksmw', title: 'Yaara Lai Star',     artist: 'Rabbi Maan',                            year: '2022' },
+  { id: 'UgUy8HVvd0g', title: 'Guggu Muggu',        artist: 'Amar Dahb',                             year: '2022' },
+];
+
+/* =============================================
+   BUILD GRID — YouTube thumbnail cards
+============================================= */
+const grid = document.getElementById('recordsGrid');
+
+tracks.forEach((track) => {
+  const card = document.createElement('div');
+  card.className = 'song-card';
+  const ytUrl = `https://www.youtube.com/watch?v=${track.id}`;
+  const thumbUrl = `https://img.youtube.com/vi/${track.id}/mqdefault.jpg`;
+  const yearBadge = track.year !== '—' ? `<span class="song-year">${track.year}</span>` : '';
+  card.innerHTML = `
+    <div class="song-thumb">
+      <img src="${thumbUrl}" alt="${track.title}" loading="lazy" />
+      ${yearBadge}
+      <div class="song-wave">
+        <div class="s-bar"></div><div class="s-bar"></div>
+        <div class="s-bar"></div><div class="s-bar"></div>
+        <div class="s-bar"></div>
+      </div>
+      <div class="song-play-overlay">
+        <div class="song-play-circle">
+          <i class="ti ti-player-play-filled"></i>
+        </div>
+      </div>
+    </div>
+    <div class="song-info">
+      <div class="song-text">
+        <div class="song-title">${track.title}</div>
+        <div class="song-artist">${track.artist}</div>
+      </div>
+      <a class="song-yt-link" href="${ytUrl}" target="_blank" rel="noopener"
+         title="Watch on YouTube" onclick="event.stopPropagation()">
+        <i class="ti ti-brand-youtube"></i>
+      </a>
+    </div>
+  `;
+  card.addEventListener('click',()=>window.open(`https://www.youtube.com/watch?v=${track.id}`,'_blank'));
+  grid.appendChild(card);
+});
+
+
+
+
+// Simplified: no embedded player.
+</script>
+</body>
+</html>
