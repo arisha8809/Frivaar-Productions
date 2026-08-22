@@ -519,6 +519,102 @@
       text-transform: uppercase;
     }
 
+    /* ---- FEATURED FILM ---- */
+    .film-feature {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      align-items: center;
+      gap: clamp(2rem, 5vw, 5rem);
+      padding: 5.5rem 4rem;
+      background: #0b0b0e;
+      border-top: 1px solid rgba(212,160,23,0.08);
+      border-bottom: 1px solid rgba(212,160,23,0.08);
+    }
+
+    .film-feature-media {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #070707;
+      border: 1px solid rgba(212,160,23,0.2);
+      box-shadow: 0 20px 55px rgba(0,0,0,0.38);
+    }
+
+    .film-feature-media a,
+    .film-feature-media img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .film-feature-media a { position: relative; }
+
+    .film-feature-media img {
+      object-fit: cover;
+      opacity: 0.78;
+      transition: transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.3s;
+    }
+
+    .film-feature-media a::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0,0,0,0.08), rgba(0,0,0,0.55)), linear-gradient(0deg, rgba(0,0,0,0.55), transparent 55%);
+    }
+
+    .film-feature-media a:hover img { transform: scale(1.035); opacity: 0.96; }
+
+    .film-feature-play {
+      position: absolute;
+      z-index: 2;
+      top: 50%;
+      left: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 3.6rem;
+      height: 3.6rem;
+      border: 1px solid rgba(212,160,23,0.8);
+      border-radius: 50%;
+      background: rgba(5,5,5,0.72);
+      color: var(--gold);
+      font-size: 1.15rem;
+      transform: translate(-50%, -50%);
+      transition: background 0.25s, color 0.25s, transform 0.25s;
+    }
+
+    .film-feature-media a:hover .film-feature-play {
+      background: var(--gold);
+      color: var(--black);
+      transform: translate(-50%, -50%) scale(1.06);
+    }
+
+    .film-feature-copy { max-width: 30rem; }
+    .film-feature-copy .eyebrow { margin-bottom: 1rem; }
+    .film-feature-copy .gold-line { margin: 0 0 1.5rem; }
+
+    .film-feature-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      font-weight: 300;
+      line-height: 0.98;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+
+    .film-feature-title em { color: var(--gold); }
+
+    .film-feature-copy p:not(.eyebrow) {
+      max-width: 30rem;
+      margin-bottom: 1.75rem;
+      color: var(--cream-dim);
+      font-family: var(--font-ui);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .film-feature-copy .btn-gold { cursor: pointer; }
+
     /* ---- RESPONSIVE ---- */
     @media (max-width: 1000px) {
       .player-stage {
@@ -533,6 +629,17 @@
 
     @media (max-width: 768px) {
       .player-stage { padding: 3rem 1rem 1.5rem; }
+      .film-feature {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 4rem 1rem 4.5rem;
+      }
+
+      .film-feature-media { aspect-ratio: 16 / 10; }
+      .film-feature-copy { max-width: none; }
+      .film-feature-title { font-size: clamp(2.5rem, 12vw, 4rem); }
+      .film-feature-copy p:not(.eyebrow) { max-width: none; font-size: 0.9rem; line-height: 1.75; }
+
       .catalog-section { padding: 3.5rem 0.85rem 6rem; }
       .catalog-header { margin-bottom: 2rem; }
       .catalog-search {
@@ -869,6 +976,23 @@
       </svg>
     </div>
   </div>
+
+  <!-- ===== FEATURED FILM ===== -->
+  <section class="film-feature" aria-labelledby="mukti-heading">
+    <div class="film-feature-media">
+      <a href="https://www.youtube.com/watch?v=LDpWh_fQQrQ" target="_blank" rel="noopener noreferrer" aria-label="Watch Mukti short film on YouTube">
+        <img src="https://img.youtube.com/vi/LDpWh_fQQrQ/hqdefault.jpg" alt="Mukti — Short Film by Frivaar Productions" loading="lazy" />
+        <span class="film-feature-play" aria-hidden="true"><i class="ti ti-player-play-filled"></i></span>
+      </a>
+    </div>
+    <div class="film-feature-copy">
+      <p class="eyebrow">Featured Film · 2020</p>
+      <div class="gold-line"></div>
+      <h2 class="film-feature-title" id="mukti-heading"><em>Mukti</em><br />The film that started it all</h2>
+      <p>Before the records, there was <em>Mukti</em> — the short film that gave Frivaar Productions its soul. A story about parents, children, and the silence between them.</p>
+      <a class="btn-gold" href="https://www.youtube.com/watch?v=LDpWh_fQQrQ" target="_blank" rel="noopener noreferrer"><span><i class="ti ti-player-play"></i> Watch Mukti</span></a>
+    </div>
+  </section>
 
   <!-- ===== CATALOG ===== -->
   <section class="catalog-section">

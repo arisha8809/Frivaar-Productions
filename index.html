@@ -47,37 +47,6 @@
       50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.7; }
     }
 
-    .hero-notes {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .music-note {
-      position: absolute;
-      display: block;
-      color: var(--gold);
-      font-family: var(--font-display);
-      font-size: clamp(1.4rem, 3vw, 3rem);
-      line-height: 1;
-      opacity: 0;
-      text-shadow: 0 0 24px rgba(212, 160, 23, 0.2);
-      animation: noteFloat 8s ease-in-out infinite;
-    }
-
-    .music-note-1 { top: 25%; left: 21%; animation-delay: 0.8s; }
-    .music-note-2 { top: 32%; right: 20%; font-size: clamp(1.1rem, 2.4vw, 2.4rem); animation-delay: 3s; }
-    .music-note-3 { bottom: 26%; left: 25%; font-size: clamp(1rem, 2vw, 2rem); animation-delay: 5.2s; }
-    .music-note-4 { bottom: 22%; right: 25%; font-size: clamp(1.2rem, 2.6vw, 2.6rem); animation-delay: 1.9s; }
-
-    @keyframes noteFloat {
-      0%, 100% { opacity: 0; transform: translate3d(0, 12px, 0) rotate(-8deg) scale(0.92); }
-      18%, 68% { opacity: 0.24; transform: translate3d(0, -6px, 0) rotate(5deg) scale(1); }
-      82% { opacity: 0; transform: translate3d(0, -18px, 0) rotate(10deg) scale(1.03); }
-    }
-
     .hero-content {
       position: relative;
       z-index: 2;
@@ -479,17 +448,7 @@
       .bts-section, .celeb-section { padding: 5rem 2rem; }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .music-note { animation: none; opacity: 0.12; }
-    }
-
     @media (max-width: 768px) {
-      .music-note { font-size: 1.35rem; }
-      .music-note-1 { top: 24%; left: 10%; }
-      .music-note-2 { top: 34%; right: 9%; font-size: 1.1rem; }
-      .music-note-3 { bottom: 29%; left: 12%; font-size: 1rem; }
-      .music-note-4 { bottom: 23%; right: 12%; font-size: 1.25rem; }
-
       .hero {
         height: auto;
         min-height: 100svh;
@@ -522,16 +481,23 @@
         width: 100%;
         flex-direction: column;
         align-items: center;
-        gap: 0.75rem;
-        margin-top: 2rem;
+        gap: 0.65rem;
+        margin-top: 1.8rem;
       }
 
       .hero-ctas .btn-gold {
-        width: min(100%, 22rem);
+        width: min(100%, 18rem);
+        min-height: 2.65rem;
         justify-content: center;
-        padding: 0.9rem 0.85rem;
-        font-size: 0.64rem;
-        letter-spacing: 0.14em;
+        padding: 0.72rem 0.8rem;
+        background: rgba(5, 5, 5, 0.2);
+        border-color: rgba(212, 160, 23, 0.78);
+        font-size: 0.58rem;
+        letter-spacing: 0.16em;
+      }
+
+      .hero-ctas .btn-gold i {
+        font-size: 0.78rem;
       }
 
       .hero-scroll { display: none; }
@@ -646,13 +612,6 @@
   <section class="hero noise">
     <div class="hero-bg-grid"></div>
     <div class="hero-bg-glow"></div>
-    <div class="hero-notes" aria-hidden="true">
-      <span class="music-note music-note-1">♪</span>
-      <span class="music-note music-note-2">♫</span>
-      <span class="music-note music-note-3">♪</span>
-      <span class="music-note music-note-4">♫</span>
-    </div>
-
     <div class="hero-content">
       <p class="hero-eyebrow">Bassi, Punjab · Est. 2020</p>
       <h1 class="hero-title">
