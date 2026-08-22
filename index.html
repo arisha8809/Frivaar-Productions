@@ -192,14 +192,38 @@
       margin-bottom: 3.5rem;
     }
 
-    .bts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    .bts-carousel {
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .bts-viewport {
+      overflow: hidden;
+    }
+
+    .bts-track {
+      display: flex;
+      width: max-content;
+      animation: btsAutoScroll 48s linear infinite;
+      will-change: transform;
+    }
+
+    .bts-set {
+      display: flex;
       gap: 1.25rem;
+      flex-shrink: 0;
+      padding: 0.5rem 0.625rem 1.25rem;
+    }
+
+    @keyframes btsAutoScroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
     }
 
     .bts-card {
       position: relative;
+      flex: 0 0 clamp(240px, 31vw, 360px);
       aspect-ratio: 4/5;
       overflow: hidden;
       background: var(--black-3);
@@ -213,44 +237,30 @@
       transform: translateY(-4px);
     }
 
-    .bts-card img {
+    .bts-card img,
+    .bts-card video {
       width: 100%;
       height: 100%;
+      display: block;
       object-fit: cover;
       position: absolute;
       inset: 0;
     }
 
-    .bts-card-placeholder {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      text-align: center;
-      padding: 1.5rem;
+    .bts-card video {
+      background: var(--black-3);
     }
 
-    .bts-card-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(10,10,10,0.85) 0%, transparent 55%);
-      display: flex;
-      align-items: flex-end;
-      padding: 1rem;
-      opacity: 0;
-      transition: opacity 0.3s;
+    @media (prefers-reduced-motion: reduce) {
+      .bts-track {
+        animation: none;
+      }
     }
 
-    .bts-card:hover .bts-card-overlay {
-      opacity: 1;
-    }
-
-    .bts-card-label {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--cream);
+    @media (max-width: 600px) {
+      .bts-card {
+        flex-basis: 78vw;
+      }
     }
 
     /* ---- CELEB WALL ---- */
@@ -482,46 +492,49 @@
       <h2 class="section-heading reveal reveal-delay-1">Inside <em>Frivaar</em></h2>
     </div>
 
-    <div class="bts-grid">
-      <!--
-        ADD BEHIND-THE-SCENES PHOTOS/CLIPS HERE.
-        Replace each placeholder card with:
-        <div class="bts-card reveal">
-          <img src="assets/your-photo.jpg" alt="Short description" />
-          <div class="bts-card-overlay">
-            <span class="bts-card-label">Caption, e.g. Studio session — Bassi</span>
+    <div class="bts-carousel">
+      <!-- Add media to assets/ using sequential names: bts1, bts2, bts3, and so on. Keep the correct file extension. -->
+      <div class="bts-viewport">
+        <div class="bts-track">
+          <div class="bts-set">
+            <div class="bts-card" data-hover>
+              <img src="assets/bts1.jpeg" alt="Behind the scenes at Frivaar Productions" />
+            </div>
+            <div class="bts-card" data-hover>
+              <img src="assets/bts2.jpeg" alt="Frivaar Productions behind the scenes" />
+            </div>
+            <div class="bts-card" data-hover>
+              <video src="assets/bts3.mp4" poster="assets/bts3.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Behind the scenes video"></video>
+            </div>
+            <div class="bts-card" data-hover>
+              <img src="assets/bts4.jpeg" alt="Behind the scenes at Frivaar Productions" />
+            </div>
+            <div class="bts-card" data-hover>
+              <video src="assets/bts5.mp4" poster="assets/bts5.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Behind the scenes video"></video>
+            </div>
+            <div class="bts-card" data-hover>
+              <img src="assets/bts6.jpeg" alt="Frivaar Productions behind the scenes" />
+            </div>
           </div>
-        </div>
-      -->
-      <div class="bts-card reveal" data-hover>
-        <div class="bts-card-placeholder">
-          <div>
-            <i class="ti ti-photo-plus" style="font-size:2.5rem;color:var(--gold-dim);"></i>
-            <p style="font-family:var(--font-mono);font-size:0.6rem;color:var(--cream-dim);letter-spacing:0.2em;margin-top:1rem;text-transform:uppercase;">Add Photo / Clip 1</p>
-          </div>
-        </div>
-      </div>
-      <div class="bts-card reveal reveal-delay-1" data-hover>
-        <div class="bts-card-placeholder">
-          <div>
-            <i class="ti ti-photo-plus" style="font-size:2.5rem;color:var(--gold-dim);"></i>
-            <p style="font-family:var(--font-mono);font-size:0.6rem;color:var(--cream-dim);letter-spacing:0.2em;margin-top:1rem;text-transform:uppercase;">Add Photo / Clip 2</p>
-          </div>
-        </div>
-      </div>
-      <div class="bts-card reveal reveal-delay-2" data-hover>
-        <div class="bts-card-placeholder">
-          <div>
-            <i class="ti ti-photo-plus" style="font-size:2.5rem;color:var(--gold-dim);"></i>
-            <p style="font-family:var(--font-mono);font-size:0.6rem;color:var(--cream-dim);letter-spacing:0.2em;margin-top:1rem;text-transform:uppercase;">Add Photo / Clip 3</p>
-          </div>
-        </div>
-      </div>
-      <div class="bts-card reveal reveal-delay-3" data-hover>
-        <div class="bts-card-placeholder">
-          <div>
-            <i class="ti ti-photo-plus" style="font-size:2.5rem;color:var(--gold-dim);"></i>
-            <p style="font-family:var(--font-mono);font-size:0.6rem;color:var(--cream-dim);letter-spacing:0.2em;margin-top:1rem;text-transform:uppercase;">Add Photo / Clip 4</p>
+          <div class="bts-set" aria-hidden="true">
+            <div class="bts-card">
+              <img src="assets/bts1.jpeg" alt="" />
+            </div>
+            <div class="bts-card">
+              <img src="assets/bts2.jpeg" alt="" />
+            </div>
+            <div class="bts-card">
+              <video src="assets/bts3.mp4" poster="assets/bts3.jpg" autoplay muted loop playsinline preload="metadata" aria-label=""></video>
+            </div>
+            <div class="bts-card">
+              <img src="assets/bts4.jpeg" alt="" />
+            </div>
+            <div class="bts-card">
+              <video src="assets/bts5.mp4" poster="assets/bts5.jpg" autoplay muted loop playsinline preload="metadata" aria-label=""></video>
+            </div>
+            <div class="bts-card">
+              <img src="assets/bts6.jpeg" alt="" />
+            </div>
           </div>
         </div>
       </div>
