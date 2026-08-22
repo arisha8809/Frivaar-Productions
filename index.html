@@ -307,11 +307,15 @@
       border-color: rgba(212, 160, 23, 0.5);
     }
 
-    .celeb-card iframe {
+    .celeb-card iframe,
+    .celeb-card video {
       width: 100%;
       height: 100%;
       border: none;
-      pointer-events: none;
+      display: block;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
     }
 
     .celeb-card-overlay {
@@ -411,12 +415,6 @@
         <span class="nav-label">Work</span>
       </a>
     </li>
-    <li>
-      <a href="milestones.html">
-        <i class="ti ti-trophy nav-icon"></i>
-        <span class="nav-label">Journey</span>
-      </a>
-    </li>
   </ul>
   <div class="nav-socials">
     <a href="https://www.instagram.com/fvproductions_5/" target="_blank" aria-label="Instagram">
@@ -425,7 +423,7 @@
     <a href="https://www.youtube.com/channel/UCdWamqRiDXmN7Nq7FU97IEA" target="_blank" aria-label="YouTube">
       <i class="ti ti-brand-youtube"></i>
     </a>
-    <a href="#" target="_blank" aria-label="Spotify">
+    <a href="https://open.spotify.com/playlist/2zHyPbyA4THVxGmaEywcFG?si=piYUFpKtRn6mfAcEg9m-lA&utm_source=copy-link&pi=v0Txp71ASZO-z" target="_blank" rel="noopener noreferrer" aria-label="Spotify playlist">
       <i class="ti ti-brand-spotify"></i>
     </a>
   </div>
@@ -498,44 +496,30 @@
       <div class="bts-viewport">
         <div class="bts-track">
           <div class="bts-set">
-            <div class="bts-card" data-hover>
-              <img src="assets/bts1.jpeg" alt="Behind the scenes at Frivaar Productions" />
-            </div>
-            <div class="bts-card" data-hover>
-              <img src="assets/bts2.jpeg" alt="Frivaar Productions behind the scenes" />
-            </div>
-            <div class="bts-card" data-hover>
-              <video src="assets/bts3.mp4" poster="assets/bts3.jpeg" autoplay muted loop playsinline preload="metadata" aria-label="Behind the scenes video"></video>
-            </div>
-            <div class="bts-card" data-hover>
-              <img src="assets/bts4.jpeg" alt="Behind the scenes at Frivaar Productions" />
-            </div>
-            <div class="bts-card" data-hover>
-              <video src="assets/bts5.mp4" poster="assets/bts5.jpeg" autoplay muted loop playsinline preload="metadata" aria-label="Behind the scenes video"></video>
-            </div>
-            <div class="bts-card" data-hover>
-              <img src="assets/bts6.jpeg" alt="Frivaar Productions behind the scenes" />
-            </div>
+            <div class="bts-card" data-hover><img src="assets/bts1.jpeg" alt="Behind the scenes at Frivaar Productions" /></div>
+            <div class="bts-card" data-hover><video src="assets/bts1video.mp4" poster="assets/bts1.jpeg" autoplay muted loop playsinline preload="metadata" aria-label="Behind the scenes video"></video></div>
+            <div class="bts-card" data-hover><img src="assets/bts2.jpeg" alt="Behind the scenes at Frivaar Productions" /></div>
+            <div class="bts-card" data-hover><video src="assets/bts2video.mp4" poster="assets/bts2.jpeg" autoplay muted loop playsinline preload="metadata" aria-label="Behind the scenes video"></video></div>
+            <div class="bts-card" data-hover><img src="assets/bts3.jpeg" alt="Behind the scenes at Frivaar Productions" /></div>
+            <div class="bts-card" data-hover><video src="assets/bts3video.mp4" poster="assets/bts3.jpeg" autoplay muted loop playsinline preload="metadata" aria-label="Behind the scenes video"></video></div>
+            <div class="bts-card" data-hover><img src="assets/bts4.jpeg" alt="Behind the scenes at Frivaar Productions" /></div>
+            <div class="bts-card" data-hover><img src="assets/bts5.jpeg" alt="Behind the scenes at Frivaar Productions" /></div>
+            <div class="bts-card" data-hover><img src="assets/bts6.jpeg" alt="Behind the scenes at Frivaar Productions" /></div>
+            <div class="bts-card" data-hover><img src="assets/bts7.jpeg" alt="Behind the scenes at Frivaar Productions" /></div>
+            <div class="bts-card" data-hover><img src="assets/bts8.jpeg" alt="Behind the scenes at Frivaar Productions" /></div>
           </div>
           <div class="bts-set" aria-hidden="true">
-            <div class="bts-card">
-              <img src="assets/bts1.jpeg" alt="" />
-            </div>
-            <div class="bts-card">
-              <img src="assets/bts2.jpeg" alt="" />
-            </div>
-            <div class="bts-card">
-              <video src="assets/bts3.mp4" poster="assets/bts3.jpeg" autoplay muted loop playsinline preload="metadata" aria-label=""></video>
-            </div>
-            <div class="bts-card">
-              <img src="assets/bts4.jpeg" alt="" />
-            </div>
-            <div class="bts-card">
-              <video src="assets/bts5.mp4" poster="assets/bts5.jpeg" autoplay muted loop playsinline preload="metadata" aria-label=""></video>
-            </div>
-            <div class="bts-card">
-              <img src="assets/bts6.jpeg" alt="" />
-            </div>
+            <div class="bts-card"><img src="assets/bts1.jpeg" alt="" /></div>
+            <div class="bts-card"><video src="assets/bts1video.mp4" poster="assets/bts1.jpeg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+            <div class="bts-card"><img src="assets/bts2.jpeg" alt="" /></div>
+            <div class="bts-card"><video src="assets/bts2video.mp4" poster="assets/bts2.jpeg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+            <div class="bts-card"><img src="assets/bts3.jpeg" alt="" /></div>
+            <div class="bts-card"><video src="assets/bts3video.mp4" poster="assets/bts3.jpeg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+            <div class="bts-card"><img src="assets/bts4.jpeg" alt="" /></div>
+            <div class="bts-card"><img src="assets/bts5.jpeg" alt="" /></div>
+            <div class="bts-card"><img src="assets/bts6.jpeg" alt="" /></div>
+            <div class="bts-card"><img src="assets/bts7.jpeg" alt="" /></div>
+            <div class="bts-card"><img src="assets/bts8.jpeg" alt="" /></div>
           </div>
         </div>
       </div>
@@ -553,50 +537,16 @@
     </div>
 
     <div class="celeb-grid">
-      <!--
-        ADD CELEB VIDEO CARDS HERE.
-        Replace the src URLs with your actual celebrity clip YouTube embeds.
-        Format: https://www.youtube.com/embed/VIDEO_ID
-
-        Example card:
-        <div class="celeb-card reveal">
-          <img src="https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg"
-               style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" alt="Celebrity Name" />
-          <div class="celeb-card-overlay">
-            <span class="celeb-card-label">Celebrity Name</span>
-          </div>
-          <div class="celeb-play-btn">
-            <i class="ti ti-player-play-filled"></i>
-          </div>
-        </div>
-      -->
-
-      <!-- PLACEHOLDER CARDS — replace with real celeb clips -->
-      <div class="celeb-card reveal" data-hover style="display:flex;align-items:center;justify-content:center;">
-        <div style="text-align:center;padding:2rem;">
-          <i class="ti ti-video-plus" style="font-size:2.5rem;color:var(--gold-dim);"></i>
-          <p style="font-family:var(--font-mono);font-size:0.6rem;color:var(--cream-dim);letter-spacing:0.2em;margin-top:1rem;text-transform:uppercase;">Add Celebrity Clip 1</p>
-          <p style="font-family:var(--font-ui);font-size:0.75rem;color:var(--cream-dim);opacity:0.5;margin-top:0.5rem;">Paste YouTube link in the HTML</p>
-        </div>
+      <div class="celeb-card reveal" data-hover>
+        <video src="assets/celeb1.mp4" autoplay muted loop playsinline controls preload="metadata" aria-label="Celebrity support video 1"></video>
       </div>
-      <div class="celeb-card reveal reveal-delay-1" data-hover style="display:flex;align-items:center;justify-content:center;">
-        <div style="text-align:center;padding:2rem;">
-          <i class="ti ti-video-plus" style="font-size:2.5rem;color:var(--gold-dim);"></i>
-          <p style="font-family:var(--font-mono);font-size:0.6rem;color:var(--cream-dim);letter-spacing:0.2em;margin-top:1rem;text-transform:uppercase;">Add Celebrity Clip 2</p>
-          <p style="font-family:var(--font-ui);font-size:0.75rem;color:var(--cream-dim);opacity:0.5;margin-top:0.5rem;">Paste YouTube link in the HTML</p>
-        </div>
+      <div class="celeb-card reveal reveal-delay-1" data-hover>
+        <video src="assets/celeb2.mp4" autoplay muted loop playsinline controls preload="metadata" aria-label="Celebrity support video 2"></video>
       </div>
-      <div class="celeb-card reveal reveal-delay-2" data-hover style="display:flex;align-items:center;justify-content:center;">
-        <div style="text-align:center;padding:2rem;">
-          <i class="ti ti-video-plus" style="font-size:2.5rem;color:var(--gold-dim);"></i>
-          <p style="font-family:var(--font-mono);font-size:0.6rem;color:var(--cream-dim);letter-spacing:0.2em;margin-top:1rem;text-transform:uppercase;">Add Celebrity Clip 3</p>
-          <p style="font-family:var(--font-ui);font-size:0.75rem;color:var(--cream-dim);opacity:0.5;margin-top:0.5rem;">Paste YouTube link in the HTML</p>
-        </div>
+      <div class="celeb-card reveal reveal-delay-2" data-hover>
+        <video src="assets/celeb3.mp4" autoplay muted loop playsinline controls preload="metadata" aria-label="Celebrity support video 3"></video>
       </div>
     </div>
-    <p style="font-family:var(--font-mono);font-size:0.6rem;color:var(--cream-dim);opacity:0.4;text-align:center;margin-top:2rem;letter-spacing:0.15em;">
-      → To add clips: replace placeholder cards with the example card format in the HTML comments above
-    </p>
   </section>
 
   <!-- FOOTER -->
