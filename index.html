@@ -289,7 +289,7 @@
 
     .celeb-grid {
       display: grid;
-      max-width: 1180px;
+      max-width: 960px;
       margin: 0 auto;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1.5rem;
@@ -297,7 +297,7 @@
 
     .celeb-card {
       position: relative;
-      aspect-ratio: 4/3;
+      aspect-ratio: 4/5;
       overflow: hidden;
       background: var(--black-3);
       border: 1px solid rgba(212, 160, 23, 0.12);
@@ -392,38 +392,6 @@
       font-size: 0.8rem;
     }
 
-    .footer-contact {
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-      text-align: right;
-    }
-
-    .footer-contact-label {
-      font-family: var(--font-mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-
-    .footer-contact a {
-      color: var(--cream-dim);
-      font-family: var(--font-ui);
-      font-size: 0.78rem;
-      transition: color 0.3s;
-    }
-
-    .footer-contact a:hover {
-      color: var(--gold);
-    }
-
-    @media (max-width: 600px) {
-      .footer-contact {
-        text-align: left;
-      }
-    }
-
     /* Click to enable video */
     .celeb-card.active iframe {
       pointer-events: auto;
@@ -476,14 +444,14 @@
     </li>
   </ul>
   <div class="nav-socials">
-    <a href="https://www.instagram.com/fvproductions_5/" target="_blank" aria-label="Instagram">
-      <i class="ti ti-brand-instagram"></i>
+    <a href="https://www.instagram.com/fvproductions_5/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <img class="social-logo" src="assets/social/instagram.svg" alt="Instagram">
     </a>
-    <a href="https://www.youtube.com/channel/UCdWamqRiDXmN7Nq7FU97IEA" target="_blank" aria-label="YouTube">
-      <i class="ti ti-brand-youtube"></i>
+    <a href="https://www.youtube.com/channel/UCdWamqRiDXmN7Nq7FU97IEA" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+      <img class="social-logo" src="assets/social/youtube.svg" alt="YouTube">
     </a>
     <a href="https://open.spotify.com/playlist/2zHyPbyA4THVxGmaEywcFG?si=piYUFpKtRn6mfAcEg9m-lA&utm_source=copy-link&pi=v0Txp71ASZO-z" target="_blank" rel="noopener noreferrer" aria-label="Spotify playlist">
-      <i class="ti ti-brand-spotify"></i>
+      <img class="social-logo" src="assets/social/spotify.svg" alt="Spotify">
     </a>
   </div>
 </nav>

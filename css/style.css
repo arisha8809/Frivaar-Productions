@@ -170,7 +170,16 @@ body:hover .cursor { opacity: 1; }
   color: var(--cream-dim);
   font-size: 16px;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: color var(--transition), transform 0.2s;
+}
+
+.social-logo {
+  width: 18px;
+  height: 18px;
+  display: block;
 }
 
 .nav-socials a:hover {
@@ -322,6 +331,32 @@ section {
   margin-top: 4px;
 }
 
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-align: right;
+}
+
+.footer-contact-label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.footer-contact a {
+  color: var(--cream-dim);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  transition: color 0.3s;
+}
+
+.footer-contact a:hover {
+  color: var(--gold);
+}
+
 .footer-copy {
   font-family: var(--font-mono);
   font-size: 0.6rem;
@@ -370,6 +405,8 @@ section {
   .page-wrap { margin-left: 0; padding-bottom: 60px; }
 
   .site-footer { padding: 2rem 1.5rem; }
+
+  .footer-contact { text-align: left; }
 
   body { cursor: auto; }
   .cursor, .cursor-ring { display: none; }
