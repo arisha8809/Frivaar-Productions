@@ -289,6 +289,8 @@
 
     .celeb-grid {
       display: grid;
+      max-width: 1180px;
+      margin: 0 auto;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1.5rem;
     }
@@ -363,6 +365,63 @@
       font-weight: 600;
       color: var(--cream);
       letter-spacing: 0.05em;
+    }
+
+    /* ---- CONTACT CTA ---- */
+    .contact-section {
+      padding: 6rem 2rem 7rem;
+      background: var(--black);
+      text-align: center;
+      position: relative;
+      border-top: 1px solid rgba(212, 160, 23, 0.18);
+    }
+
+    .contact-copy {
+      max-width: 520px;
+      margin: 1.25rem auto 2rem;
+      color: var(--cream-dim);
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      line-height: 1.7;
+    }
+
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: 0.8rem;
+    }
+
+    .footer-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      text-align: right;
+    }
+
+    .footer-contact-label {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .footer-contact a {
+      color: var(--cream-dim);
+      font-family: var(--font-ui);
+      font-size: 0.78rem;
+      transition: color 0.3s;
+    }
+
+    .footer-contact a:hover {
+      color: var(--gold);
+    }
+
+    @media (max-width: 600px) {
+      .footer-contact {
+        text-align: left;
+      }
     }
 
     /* Click to enable video */
@@ -547,6 +606,17 @@
         <video src="assets/celeb3.mp4" autoplay muted loop playsinline controls preload="metadata" aria-label="Celebrity support video 3"></video>
       </div>
     </div>
+    </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section">
+    <p class="eyebrow reveal">Start a conversation</p>
+    <div class="gold-line reveal reveal-delay-1" style="margin: 1.5rem auto;"></div>
+    <h2 class="section-heading reveal reveal-delay-1">Let’s make something <em>worth hearing.</em></h2>
+    <p class="contact-copy reveal reveal-delay-2">For music, film, artist collaborations, or production enquiries, reach out to the Frivaar Productions team.</p>
+    <a class="btn-gold contact-email reveal reveal-delay-2" href="mailto:frivaarproductions@gmail.com">
+      <i class="ti ti-mail"></i> frivaarproductions@gmail.com
+    </a>
   </section>
 
   <!-- FOOTER -->
@@ -554,6 +624,10 @@
     <div>
       <div class="footer-brand">Frivaar Productions</div>
       <div class="footer-tagline">Born on a Friday · ਫ੍ਰਿਵਾਰ ਪ੍ਰੋਡਕਸ਼ਨਜ਼</div>
+    </div>
+    <div class="footer-contact">
+      <span class="footer-contact-label">Contact</span>
+      <a href="mailto:frivaarproductions@gmail.com">frivaarproductions@gmail.com</a>
     </div>
     <div class="footer-copy">© 2025 Frivaar Productions. All rights reserved.</div>
   </footer>
