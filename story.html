@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Story — Frivaar Productions</title>
   <link rel="icon" href="assets/logo.png" type="image/png" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css?v=mobile-fix-4" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
   <style>
     /* ---- STORY HERO ---- */
@@ -321,8 +321,33 @@
       }
 
       .origin-sticky {
-        min-height: 360px;
-        padding: 1.75rem 1.25rem;
+        position: relative;
+        display: block;
+        min-height: 0;
+        padding: 0;
+        border: 0;
+        overflow: visible;
+      }
+
+      .origin-sticky-media {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        min-height: 0;
+        border: 1px solid rgba(212, 160, 23, 0.16);
+        overflow: hidden;
+      }
+
+      .origin-sticky-content {
+        position: absolute;
+        left: 1.25rem;
+        right: 1.25rem;
+        bottom: 1.25rem;
+      }
+
+      .origin-body {
+        min-width: 0;
       }
 
       .origin-body p {
@@ -526,7 +551,7 @@
 
 </main>
 
-<script src="js/main.js"></script>
+<script src="js/main.js?v=mobile-fix-4"></script>
 <script>
   // Mukti video: build thumbnail from pasted YouTube URL, open on click (avoids embed error 153)
   document.querySelectorAll('.mukti-video[data-youtube-url]').forEach(function (el) {

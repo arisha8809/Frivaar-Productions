@@ -6,7 +6,7 @@
   <title>Frivaar Productions — Born on a Friday</title>
   <meta name="description" content="Frivaar Productions — a music & film production house from Punjab, championing new talent and Punjabi culture worldwide." />
   <link rel="icon" href="assets/logo.png" type="image/png" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css?v=mobile-fix-4" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
   <style>
     /* ---- HERO ---- */
@@ -268,9 +268,20 @@
         flex-basis: 68vw;
       }
 
+      .bts-viewport {
+        overflow-x: auto;
+        overflow-y: hidden;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .bts-viewport::-webkit-scrollbar {
+        display: none;
+      }
+
       .bts-track {
-        animation-duration: 60s;
-        animation-play-state: running;
+        animation: none !important;
+        transform: none !important;
       }
     }
 
@@ -464,6 +475,15 @@
       }
 
       .hero-scroll { display: none; }
+
+      .hero-eyebrow,
+      .hero-title,
+      .hero-tagline,
+      .hero-ctas {
+        opacity: 1;
+        animation: none;
+        transform: none;
+      }
     }
   </style>
 </head>
@@ -660,7 +680,7 @@
 
 </main>
 
-<script src="js/main.js"></script>
+<script src="js/main.js?v=mobile-fix-4"></script>
 <script>
   // Keep muted BTS videos playing on mobile browsers after the page becomes visible.
   function resumeBtsVideos() {
@@ -674,32 +694,47 @@
     if (!document.hidden) resumeBtsVideos();
   });
 
-  // JavaScript fallback keeps the seamless BTS loop moving on mobile browsers
-  // that pause or ignore long CSS animations.
+  // Use native horizontal scrolling for the BTS loop on mobile. This works more
+  // reliably than a long CSS transform animation in iOS and Android browsers.
   (function () {
     if (!window.matchMedia('(max-width: 600px)').matches) return;
     var track = document.querySelector('.bts-track');
+    var viewport = document.querySelector('.bts-viewport');
     var firstSet = track && track.querySelector('.bts-set');
-    if (!track || !firstSet) return;
+    if (!track || !viewport || !firstSet) return;
 
-    var offset = 0;
-    var lastTime = 0;
-    var speed = 22;
+    var lastTime = performance.now();
+    var lastFrame = lastTime;
+    var scrollPosition = viewport.scrollLeft;
+    var speed = 26;
     track.classList.add('bts-js');
 
-    function moveBts(now) {
-      if (!lastTime) lastTime = now;
-      var elapsed = Math.min(now - lastTime, 80);
+    function step(now) {
+      var elapsed = Math.min(Math.max(now - lastTime, 0), 120);
       lastTime = now;
       var setWidth = firstSet.getBoundingClientRect().width;
       if (setWidth > 0) {
-        offset -= speed * elapsed / 1000;
-        if (-offset >= setWidth) offset += setWidth;
-        track.style.transform = 'translate3d(' + offset + 'px, 0, 0)';
+        scrollPosition += speed * elapsed / 1000;
+        if (scrollPosition >= setWidth) scrollPosition -= setWidth;
+        viewport.scrollLeft = scrollPosition;
       }
+    }
+
+    function moveBts(now) {
+      step(now);
+      lastFrame = now;
       window.requestAnimationFrame(moveBts);
     }
+
     window.requestAnimationFrame(moveBts);
+    window.setInterval(function () {
+      if (document.hidden) return;
+      var now = performance.now();
+      if (now - lastFrame > 150) {
+        step(now);
+        lastFrame = now;
+      }
+    }, 100);
   }());
 
   // Celeb card click to play
