@@ -6,7 +6,7 @@
   <title>Frivaar Productions — Born on a Friday</title>
   <meta name="description" content="Frivaar Productions — a music & film production house from Punjab, championing new talent and Punjabi culture worldwide." />
   <link rel="icon" href="assets/logo.png" type="image/png" />
-    <link rel="stylesheet" href="css/style.css?v=mobile-fix-12" />
+    <link rel="stylesheet" href="css/style.css?v=site-update-1" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
   <style>
     /* ---- HERO ---- */
@@ -45,6 +45,37 @@
     @keyframes breathe {
       0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
       50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.7; }
+    }
+
+    .hero-notes {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .music-note {
+      position: absolute;
+      display: block;
+      color: var(--gold);
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 3rem);
+      line-height: 1;
+      opacity: 0;
+      text-shadow: 0 0 24px rgba(212, 160, 23, 0.2);
+      animation: noteFloat 8s ease-in-out infinite;
+    }
+
+    .music-note-1 { top: 25%; left: 21%; animation-delay: 0.8s; }
+    .music-note-2 { top: 32%; right: 20%; font-size: clamp(1.1rem, 2.4vw, 2.4rem); animation-delay: 3s; }
+    .music-note-3 { bottom: 26%; left: 25%; font-size: clamp(1rem, 2vw, 2rem); animation-delay: 5.2s; }
+    .music-note-4 { bottom: 22%; right: 25%; font-size: clamp(1.2rem, 2.6vw, 2.6rem); animation-delay: 1.9s; }
+
+    @keyframes noteFloat {
+      0%, 100% { opacity: 0; transform: translate3d(0, 12px, 0) rotate(-8deg) scale(0.92); }
+      18%, 68% { opacity: 0.24; transform: translate3d(0, -6px, 0) rotate(5deg) scale(1); }
+      82% { opacity: 0; transform: translate3d(0, -18px, 0) rotate(10deg) scale(1.03); }
     }
 
     .hero-content {
@@ -448,7 +479,17 @@
       .bts-section, .celeb-section { padding: 5rem 2rem; }
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      .music-note { animation: none; opacity: 0.12; }
+    }
+
     @media (max-width: 768px) {
+      .music-note { font-size: 1.35rem; }
+      .music-note-1 { top: 24%; left: 10%; }
+      .music-note-2 { top: 34%; right: 9%; font-size: 1.1rem; }
+      .music-note-3 { bottom: 29%; left: 12%; font-size: 1rem; }
+      .music-note-4 { bottom: 23%; right: 12%; font-size: 1.25rem; }
+
       .hero {
         height: auto;
         min-height: 100svh;
@@ -573,15 +614,15 @@
       </a>
     </li>
     <li>
-      <a href="story.html">
-        <i class="ti ti-book nav-icon"></i>
-        <span class="nav-label">Story</span>
-      </a>
-    </li>
-    <li>
       <a href="work.html">
         <i class="ti ti-vinyl nav-icon"></i>
         <span class="nav-label">Work</span>
+      </a>
+    </li>
+    <li>
+      <a href="story.html">
+        <i class="ti ti-book nav-icon"></i>
+        <span class="nav-label">About Us</span>
       </a>
     </li>
   </ul>
@@ -605,6 +646,12 @@
   <section class="hero noise">
     <div class="hero-bg-grid"></div>
     <div class="hero-bg-glow"></div>
+    <div class="hero-notes" aria-hidden="true">
+      <span class="music-note music-note-1">♪</span>
+      <span class="music-note music-note-2">♫</span>
+      <span class="music-note music-note-3">♪</span>
+      <span class="music-note music-note-4">♫</span>
+    </div>
 
     <div class="hero-content">
       <p class="hero-eyebrow">Bassi, Punjab · Est. 2020</p>
@@ -618,7 +665,7 @@
           <span><i class="ti ti-player-play"></i> Explore Our Work</span>
         </a>
         <a href="story.html" class="btn-gold">
-          <span><i class="ti ti-book-2"></i> Our Story</span>
+          <span><i class="ti ti-book-2"></i> About Us</span>
         </a>
       </div>
     </div>

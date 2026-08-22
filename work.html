@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Work — Frivaar Productions</title>
   <link rel="icon" href="assets/logo.png" type="image/png" />
-  <link rel="stylesheet" href="css/style.css?v=mobile-fix-12" />
+  <link rel="stylesheet" href="css/style.css?v=site-update-1" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
   <style>
 
@@ -474,6 +474,51 @@
       background: rgba(212,160,23,0.06);
     }
 
+    .catalog-search {
+      width: min(100%, 30rem);
+      margin: 1.75rem auto 0;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid rgba(212,160,23,0.28);
+      background: rgba(10,10,10,0.72);
+      color: rgba(212,160,23,0.72);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .catalog-search:focus-within {
+      border-color: rgba(212,160,23,0.72);
+      box-shadow: 0 0 0 3px rgba(212,160,23,0.07);
+    }
+
+    .catalog-search i { flex-shrink: 0; font-size: 1rem; }
+
+    .catalog-search input {
+      width: 100%;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--cream);
+      font-family: var(--font-ui);
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+    }
+
+    .catalog-search input::placeholder { color: rgba(210,200,175,0.38); }
+    .song-card[hidden] { display: none; }
+
+    .catalog-empty {
+      padding: 3rem 1rem;
+      color: rgba(210,200,175,0.5);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
     /* ---- RESPONSIVE ---- */
     @media (max-width: 1000px) {
       .player-stage {
@@ -490,6 +535,10 @@
       .player-stage { padding: 3rem 1rem 1.5rem; }
       .catalog-section { padding: 3.5rem 0.85rem 6rem; }
       .catalog-header { margin-bottom: 2rem; }
+      .catalog-search {
+        margin-top: 1.25rem;
+        padding: 0.7rem 0.85rem;
+      }
       .records-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 0.75rem;
@@ -535,8 +584,8 @@
   <div class="nav-logo"><img src="assets/logo.png" alt="Frivaar Productions" /></div>
   <ul class="nav-links">
     <li><a href="index.html"><i class="ti ti-home nav-icon"></i><span class="nav-label">Home</span></a></li>
-    <li><a href="story.html"><i class="ti ti-book nav-icon"></i><span class="nav-label">Story</span></a></li>
     <li><a href="work.html" class="active"><i class="ti ti-vinyl nav-icon"></i><span class="nav-label">Work</span></a></li>
+    <li><a href="story.html"><i class="ti ti-book nav-icon"></i><span class="nav-label">About Us</span></a></li>
   </ul>
   <div class="nav-socials">
     <a href="https://www.instagram.com/fvproductions_5/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img class="social-logo" src="assets/social/instagram.png" alt="Instagram"></a>
@@ -827,9 +876,14 @@
       <p class="eyebrow">The Full Catalog</p>
       <div class="gold-line" style="margin: 1.25rem auto;"></div>
       <h2 class="section-heading">Pick a <em>record</em></h2>
-      <p class="catalog-intro"></p>
+      <p class="catalog-intro">Search the collection by song title or artist.</p>
+      <label class="catalog-search" for="catalogSearch">
+        <i class="ti ti-search" aria-hidden="true"></i>
+        <input id="catalogSearch" type="search" placeholder="Search by song or artist" aria-label="Search songs or artists" autocomplete="off" />
+      </label>
     </div>
     <div class="records-grid" id="recordsGrid"></div>
+    <p class="catalog-empty" id="catalogEmpty" hidden>No records match that search.</p>
   </section>
 
   <!-- FOOTER -->
@@ -899,10 +953,13 @@ const tracks = [
    BUILD GRID — YouTube thumbnail cards
 ============================================= */
 const grid = document.getElementById('recordsGrid');
+const searchInput = document.getElementById('catalogSearch');
+const emptyState = document.getElementById('catalogEmpty');
 
 tracks.forEach((track) => {
   const card = document.createElement('div');
   card.className = 'song-card';
+  card.dataset.search = `${track.title} ${track.artist}`.toLowerCase();
   const ytUrl = `https://www.youtube.com/watch?v=${track.id}`;
   const thumbUrl = `https://img.youtube.com/vi/${track.id}/mqdefault.jpg`;
   const yearBadge = track.year !== '—' ? `<span class="song-year">${track.year}</span>` : '';
@@ -933,11 +990,23 @@ tracks.forEach((track) => {
     </div>
   `;
   card.addEventListener('click',()=>window.open(`https://www.youtube.com/watch?v=${track.id}`,'_blank'));
-  grid.appendChild(card);
+    grid.appendChild(card);
 });
 
+function filterTracks(query) {
+  const normalizedQuery = query.trim().toLowerCase();
+  let visibleCount = 0;
 
+  grid.querySelectorAll('.song-card').forEach((card) => {
+    const matches = !normalizedQuery || card.dataset.search.includes(normalizedQuery);
+    card.hidden = !matches;
+    if (matches) visibleCount += 1;
+  });
 
+  emptyState.hidden = visibleCount !== 0;
+}
+
+searchInput.addEventListener('input', (event) => filterTracks(event.target.value));
 
 // Simplified: no embedded player.
 </script>
