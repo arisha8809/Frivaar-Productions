@@ -201,96 +201,6 @@
       margin-bottom: 0 !important;
     }
 
-    /* ---- MUKTI FILM ---- */
-    .mukti-section {
-      padding: 6rem;
-      background: var(--black);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-    }
-
-    .mukti-video {
-      position: relative;
-      aspect-ratio: 16/9;
-      background: var(--black-3);
-      border: 1px solid rgba(212,160,23,0.2);
-      overflow: hidden;
-      cursor: none;
-    }
-
-    .mukti-thumb {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .mukti-video-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 50%);
-    }
-
-    .mukti-play-btn {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 64px;
-      height: 64px;
-      border: 1px solid var(--gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold);
-      font-size: 20px;
-      background: rgba(10,10,10,0.6);
-      backdrop-filter: blur(4px);
-      transition: background 0.3s, transform 0.3s;
-    }
-
-    .mukti-video:hover .mukti-play-btn {
-      background: var(--gold);
-      color: var(--black);
-      transform: translate(-50%, -50%) scale(1.1);
-    }
-
-    .mukti-text .film-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      border: 1px solid var(--gold-dim);
-      padding: 0.35rem 0.85rem;
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-
-    .mukti-text h2 {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 300;
-      color: var(--cream);
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-    }
-
-    .mukti-text h2 em { color: var(--gold); }
-
-    .mukti-text p {
-      font-family: var(--font-ui);
-      font-size: 1rem;
-      line-height: 1.8;
-      color: var(--cream-dim);
-      margin-bottom: 1.5rem;
-    }
-
     /* ---- RESPONSIVE ---- */
     @media (max-width: 900px) {
       .story-hero { padding: 3rem 2rem; height: auto; padding-top: 5rem; }
@@ -298,7 +208,6 @@
       .origin-grid { grid-template-columns: 1fr; gap: 2rem; }
       .origin-sticky { position: relative; }
       .origin-sticky { min-height: 320px; }
-      .mukti-section { grid-template-columns: 1fr; padding: 4rem 2rem; }
     }
 
     @media (max-width: 768px) {
@@ -365,16 +274,6 @@
 
       .pull-quote p {
         font-size: 1.25rem;
-      }
-
-      .mukti-section {
-        padding: 4rem 1.25rem 5rem;
-        gap: 2rem;
-      }
-
-      .mukti-text p {
-        font-size: 0.95rem;
-        line-height: 1.75;
       }
     }
   </style>
@@ -448,31 +347,6 @@
           The name itself holds the vision. <strong>Frivaar</strong> — a bridge between <em>Friday</em> and <em>Shukrvaar</em>, the day every new movie releases in India. The day of new beginnings. The day when stories meet the world.
         </p>
       </div>
-    </div>
-  </section>
-
-  <!-- MUKTI FILM -->
-  <section class="mukti-section">
-    <!--
-      TO UPDATE THIS VIDEO: just paste the full YouTube link (any format —
-      youtube.com/watch?v=..., youtu.be/..., or youtube.com/embed/...)
-      into data-youtube-url below. The thumbnail and click-through are generated automatically.
-      This avoids embed error 153 (owner has disabled embedding) since it links out to YouTube instead of playing inline.
-    -->
-    <div class="mukti-video reveal" data-youtube-url="https://www.youtube.com/watch?v=LDpWh_fQQrQ" data-hover>
-      <img class="mukti-thumb" src="https://img.youtube.com/vi/LDpWh_fQQrQ/hqdefault.jpg" alt="Mukti — Short Film by Frivaar Productions" loading="lazy" />
-      <div class="mukti-video-overlay"></div>
-      <div class="mukti-play-btn"><i class="ti ti-player-play-filled"></i></div>
-    </div>
-    <div class="mukti-text">
-      <div class="film-badge reveal"><i class="ti ti-movie"></i> Short Film · 2020</div>
-      <h2 class="reveal reveal-delay-1"><em>Mukti</em><br/>The film that started it all</h2>
-      <p class="reveal reveal-delay-2">
-        Written from the heart after witnessing a play at an old age home, <em>Mukti</em> is the story that gave Frivaar Productions its soul. A story about parents, about children who leave, about the silence between them.
-      </p>
-      <p class="reveal reveal-delay-2">
-        This short film was the first proof that Frivaar had something real to say — and that the world was ready to listen.
-      </p>
     </div>
   </section>
 
@@ -559,36 +433,6 @@
 </main>
 
 <script src="js/main.js?v=mobile-fix-12"></script>
-<script>
-  // Mukti video: build thumbnail from pasted YouTube URL, open on click (avoids embed error 153)
-  document.querySelectorAll('.mukti-video[data-youtube-url]').forEach(function (el) {
-    var url = el.getAttribute('data-youtube-url');
-    var match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([a-zA-Z0-9_-]{11})/);
-    var id = match ? match[1] : null;
-    if (id) {
-      var img = el.querySelector('.mukti-thumb');
-      // Not every video has a maxresdefault/sddefault thumbnail. YouTube doesn't
-      // error in that case — it silently returns a tiny 120x90 grey placeholder,
-      // which is what was showing up blurry. Detect that size and step down
-      // to a quality that always exists (hqdefault).
-      var qualities = ['maxresdefault', 'sddefault', 'hqdefault', 'mqdefault'];
-      var qi = 0;
-      function tryNext() {
-        if (qi >= qualities.length) return;
-        img.src = 'https://img.youtube.com/vi/' + id + '/' + qualities[qi] + '.jpg';
-        qi++;
-      }
-      img.addEventListener('load', function () {
-        if (img.naturalWidth === 120) tryNext();
-      });
-      img.addEventListener('error', tryNext);
-      tryNext();
-      el.addEventListener('click', function () {
-        window.open('https://www.youtube.com/watch?v=' + id, '_blank');
-      });
-    }
-  });
-</script>
 <style>
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(30px); }
