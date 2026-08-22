@@ -6,7 +6,7 @@
   <title>Frivaar Productions — Born on a Friday</title>
   <meta name="description" content="Frivaar Productions — a music & film production house from Punjab, championing new talent and Punjabi culture worldwide." />
   <link rel="icon" href="assets/logo.png" type="image/png" />
-    <link rel="stylesheet" href="css/style.css?v=mobile-fix-11" />
+    <link rel="stylesheet" href="css/style.css?v=mobile-fix-12" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
   <style>
     /* ---- HERO ---- */
@@ -285,9 +285,9 @@
       }
 
       .bts-card {
-        flex: 0 0 calc(100vw - 2rem);
-        width: calc(100vw - 2rem);
-        max-width: calc(100vw - 2rem);
+        flex: 0 0 calc((100vw - 3.25rem) / 2);
+        width: calc((100vw - 3.25rem) / 2);
+        max-width: calc((100vw - 3.25rem) / 2);
       }
 
       .bts-viewport::-webkit-scrollbar {
@@ -749,7 +749,7 @@
 
 </main>
 
-<script src="js/main.js?v=mobile-fix-11"></script>
+<script src="js/main.js?v=mobile-fix-12"></script>
 <script>
   // Keep muted BTS videos playing on mobile browsers after the page becomes visible.
   function resumeBtsVideos() {
@@ -784,7 +784,7 @@
     }
     function start() {
       if (timer) window.clearInterval(timer);
-      timer = window.setInterval(advance, 2800);
+      timer = window.setInterval(advance, 2200);
     }
     start();
     window.addEventListener('pageshow', start);
