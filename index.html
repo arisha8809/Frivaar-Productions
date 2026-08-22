@@ -6,7 +6,7 @@
   <title>Frivaar Productions — Born on a Friday</title>
   <meta name="description" content="Frivaar Productions — a music & film production house from Punjab, championing new talent and Punjabi culture worldwide." />
   <link rel="icon" href="assets/logo.png" type="image/png" />
-    <link rel="stylesheet" href="css/style.css?v=mobile-fix-10" />
+    <link rel="stylesheet" href="css/style.css?v=mobile-fix-11" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
   <style>
     /* ---- HERO ---- */
@@ -264,11 +264,7 @@
     }
 
     @media (max-width: 600px) {
-      /* Keep the BTS strip as a real marquee on phones; do not depend on touch scrolling. */
-      .bts-card {
-        flex-basis: 68vw;
-      }
-
+      /* On phones, show one complete BTS media card at a time. */
       .bts-viewport {
         overflow-x: auto;
         overflow-y: hidden;
@@ -276,6 +272,22 @@
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
+        padding: 0 1rem;
+      }
+
+      .bts-set {
+        gap: 0.85rem;
+        padding: 0;
+      }
+
+      .bts-set + .bts-set {
+        display: none;
+      }
+
+      .bts-card {
+        flex: 0 0 calc(100vw - 2rem);
+        width: calc(100vw - 2rem);
+        max-width: calc(100vw - 2rem);
       }
 
       .bts-viewport::-webkit-scrollbar {
@@ -695,13 +707,13 @@
 
     <div class="celeb-grid">
       <div class="celeb-card reveal" data-hover>
-        <video src="assets/celeb1.mp4" autoplay muted loop playsinline controls preload="metadata" aria-label="Celebrity support video 1"></video>
+        <video src="assets/celeb1.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Celebrity support video 1"></video>
       </div>
       <div class="celeb-card reveal reveal-delay-1" data-hover>
-        <video src="assets/celeb2.mp4" autoplay muted loop playsinline controls preload="metadata" aria-label="Celebrity support video 2"></video>
+        <video src="assets/celeb2.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Celebrity support video 2"></video>
       </div>
       <div class="celeb-card reveal reveal-delay-2" data-hover>
-        <video src="assets/celeb3.mp4" autoplay muted loop playsinline controls preload="metadata" aria-label="Celebrity support video 3"></video>
+        <video src="assets/celeb3.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Celebrity support video 3"></video>
       </div>
     </div>
     </section>
@@ -737,7 +749,7 @@
 
 </main>
 
-<script src="js/main.js?v=mobile-fix-10"></script>
+<script src="js/main.js?v=mobile-fix-11"></script>
 <script>
   // Keep muted BTS videos playing on mobile browsers after the page becomes visible.
   function resumeBtsVideos() {
@@ -757,39 +769,37 @@
   (function () {
     if (!window.matchMedia('(max-width: 600px)').matches) return;
     var viewport = document.querySelector('.bts-viewport');
-    var cards = viewport ? Array.prototype.slice.call(viewport.querySelectorAll('.bts-card')) : [];
+        var firstSet = viewport && viewport.querySelector('.bts-set');
+    var cards = firstSet ? Array.prototype.slice.call(firstSet.querySelectorAll('.bts-card')) : [];
     if (!viewport || cards.length < 2) return;
     var index = 0;
     var timer;
-
     function cardLeft(card) {
-      return card.getBoundingClientRect().left - viewport.getBoundingClientRect().left + viewport.scrollLeft;
+      return card.getBoundingClientRect().left - viewport.getBoundingClientRect().left + viewport.scrollLeft - 16;
     }
-
     function advance() {
       index += 1;
-      if (index >= cards.length) {
-        index = 0;
-        viewport.scrollTo({ left: 0, behavior: 'auto' });
-        return;
-      }
-      viewport.scrollTo({ left: cardLeft(cards[index]), behavior: 'smooth' });
+      if (index >= cards.length) index = 0;
+      viewport.scrollTo({ left: Math.max(0, cardLeft(cards[index])), behavior: index === 0 ? 'auto' : 'smooth' });
     }
-
     function start() {
       if (timer) window.clearInterval(timer);
-      timer = window.setInterval(advance, 3200);
+      timer = window.setInterval(advance, 2800);
     }
-
     start();
     window.addEventListener('pageshow', start);
   }());
 
 
-  // Celeb card click to play
-  document.querySelectorAll('.celeb-card').forEach(card => {
-    card.addEventListener('click', () => {
-      card.classList.toggle('active');
+  // Keep celebrity controls hidden until the user taps a card.
+  document.querySelectorAll('.celeb-card').forEach(function (card) {
+    var video = card.querySelector('video');
+    if (!video) return;
+    video.controls = false;
+    card.addEventListener('click', function () {
+      var active = card.classList.toggle('active');
+      video.controls = active;
+      if (active) video.play().catch(function () {});
     });
   });
 </script>
