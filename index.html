@@ -6,7 +6,7 @@
   <title>Frivaar Productions — Born on a Friday</title>
   <meta name="description" content="Frivaar Productions — a music & film production house from Punjab, championing new talent and Punjabi culture worldwide." />
   <link rel="icon" href="assets/logo.png" type="image/png" />
-  <link rel="stylesheet" href="css/style.css?v=mobile-fix-4" />
+    <link rel="stylesheet" href="css/style.css?v=mobile-fix-6" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
   <style>
     /* ---- HERO ---- */
@@ -264,24 +264,18 @@
     }
 
     @media (max-width: 600px) {
+      /* Keep the BTS strip as a real marquee on phones; do not depend on touch scrolling. */
       .bts-card {
         flex-basis: 68vw;
       }
 
       .bts-viewport {
-        overflow-x: auto;
-        overflow-y: hidden;
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .bts-viewport::-webkit-scrollbar {
-        display: none;
+        overflow: hidden;
       }
 
       .bts-track {
-        animation: none !important;
-        transform: none !important;
+        animation: btsAutoScroll 52s linear infinite !important;
+        transform: translate3d(0, 0, 0);
       }
     }
 
@@ -475,6 +469,50 @@
       }
 
       .hero-scroll { display: none; }
+
+      /* Mobile celebrity carousel: shorter cards, native swipe, desktop grid untouched. */
+      .celeb-section {
+        padding: 5rem 0 4rem;
+      }
+
+      .celeb-header {
+        padding: 0 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .celeb-header .section-heading {
+        font-size: clamp(2.1rem, 10vw, 3rem);
+        line-height: 1.02;
+      }
+
+      .celeb-grid {
+        display: flex;
+        max-width: none;
+        margin: 0;
+        gap: 0.85rem;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 0 1rem 0.8rem;
+        scroll-snap-type: x mandatory;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .celeb-grid::-webkit-scrollbar {
+        display: none;
+      }
+
+      .celeb-card {
+        flex: 0 0 min(76vw, 260px);
+        aspect-ratio: 4 / 3;
+        scroll-snap-align: center;
+      }
+
+      .celeb-card video {
+        object-fit: contain;
+        background: #050505;
+      }
 
       .hero-eyebrow,
       .hero-title,
@@ -675,12 +713,17 @@
       <span class="footer-contact-label">Contact</span>
       <a href="mailto:frivaarproductions@gmail.com">frivaarproductions@gmail.com</a>
     </div>
+    <div class="footer-socials" aria-label="Social links">
+      <a href="https://www.instagram.com/fvproductions_5/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="assets/social/instagram.png" alt="Instagram"></a>
+      <a href="https://www.youtube.com/channel/UCdWamqRiDXmN7Nq7FU97IEA" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><img src="assets/social/youtube.svg" alt="YouTube"></a>
+      <a href="https://open.spotify.com/playlist/2zHyPbyA4THVxGmaEywcFG?si=piYUFpKtRn6mfAcEg9m-lA&utm_source=copy-link&pi=v0Txp71ASZO-z" target="_blank" rel="noopener noreferrer" aria-label="Spotify playlist"><img src="assets/social/spotify.svg" alt="Spotify"></a>
+    </div>
     <div class="footer-copy">© 2025 Frivaar Productions. All rights reserved.</div>
   </footer>
 
 </main>
 
-<script src="js/main.js?v=mobile-fix-4"></script>
+<script src="js/main.js?v=mobile-fix-6"></script>
 <script>
   // Keep muted BTS videos playing on mobile browsers after the page becomes visible.
   function resumeBtsVideos() {
@@ -694,48 +737,9 @@
     if (!document.hidden) resumeBtsVideos();
   });
 
-  // Use native horizontal scrolling for the BTS loop on mobile. This works more
-  // reliably than a long CSS transform animation in iOS and Android browsers.
-  (function () {
-    if (!window.matchMedia('(max-width: 600px)').matches) return;
-    var track = document.querySelector('.bts-track');
-    var viewport = document.querySelector('.bts-viewport');
-    var firstSet = track && track.querySelector('.bts-set');
-    if (!track || !viewport || !firstSet) return;
+  // Mobile uses the CSS marquee above; this only retries muted inline-video playback.
+  // Keeping motion in CSS avoids iOS scroll-container quirks and preserves the seamless loop.
 
-    var lastTime = performance.now();
-    var lastFrame = lastTime;
-    var scrollPosition = viewport.scrollLeft;
-    var speed = 26;
-    track.classList.add('bts-js');
-
-    function step(now) {
-      var elapsed = Math.min(Math.max(now - lastTime, 0), 120);
-      lastTime = now;
-      var setWidth = firstSet.getBoundingClientRect().width;
-      if (setWidth > 0) {
-        scrollPosition += speed * elapsed / 1000;
-        if (scrollPosition >= setWidth) scrollPosition -= setWidth;
-        viewport.scrollLeft = scrollPosition;
-      }
-    }
-
-    function moveBts(now) {
-      step(now);
-      lastFrame = now;
-      window.requestAnimationFrame(moveBts);
-    }
-
-    window.requestAnimationFrame(moveBts);
-    window.setInterval(function () {
-      if (document.hidden) return;
-      var now = performance.now();
-      if (now - lastFrame > 150) {
-        step(now);
-        lastFrame = now;
-      }
-    }, 100);
-  }());
 
   // Celeb card click to play
   document.querySelectorAll('.celeb-card').forEach(card => {

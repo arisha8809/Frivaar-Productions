@@ -365,6 +365,8 @@ section {
   letter-spacing: 0.1em;
 }
 
+.footer-socials { display: none; }
+
 /* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
   :root { --nav-width: 0px; }
@@ -380,74 +382,119 @@ section {
     transition: none !important;
   }
 
-  /* A simple header is easier to use than a floating dock on narrow screens. */
+  /* Compact mobile header: a logo plus a rounded navigation control. */
   .side-nav {
     width: 100%;
-    height: 72px;
+    height: 68px;
     top: 0;
     right: 0;
     bottom: auto;
     left: 0;
     display: grid;
-    grid-template-columns: 44px 1fr;
+    grid-template-columns: 40px 1fr;
     align-items: center;
-    padding: 0 1rem;
+    padding: 0 0.8rem;
+    background: rgba(8, 8, 8, 0.96);
     border: 0;
-    border-bottom: 1px solid rgba(212, 160, 23, 0.18);
+    border-bottom: 1px solid rgba(212, 160, 23, 0.2);
     border-radius: 0;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(14px);
   }
 
   .nav-logo {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
   }
 
   .nav-links {
-    justify-self: center;
+    justify-self: end;
     flex-direction: row;
-    gap: 0.7rem;
+    gap: 0.15rem;
+    padding: 0.2rem;
+    border: 1px solid rgba(212, 160, 23, 0.2);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.035);
   }
 
   .nav-links a {
-    min-width: 48px;
-    padding: 0.45rem 0.35rem 0.35rem;
-    gap: 3px;
+    min-width: 52px;
+    min-height: 42px;
+    padding: 0.35rem 0.45rem 0.3rem;
+    gap: 2px;
+    border-radius: 999px;
   }
 
   .nav-links a .nav-icon {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .nav-links a .nav-label {
-    font-size: 0.48rem;
+    font-size: 0.45rem;
     letter-spacing: 0.12em;
   }
 
   .nav-links a::before {
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
-    width: 0;
-    height: 2px;
+    display: none;
   }
 
-  .nav-links a:hover::before,
-  .nav-links a.active::before {
-    width: 70%;
-    height: 2px;
+  .nav-links a.active {
+    color: var(--gold);
+    background: rgba(212, 160, 23, 0.14);
+    box-shadow: inset 0 0 0 1px rgba(212, 160, 23, 0.18);
   }
 
-  /* Keep social links available in the footer instead of overcrowding the header. */
+  /* Social logos live in the short footer on mobile, not in the header. */
   .nav-socials { display: none; }
+
+  .footer-socials {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .footer-socials a {
+    display: grid;
+    width: 30px;
+    height: 30px;
+    place-items: center;
+    border: 1px solid rgba(212, 160, 23, 0.18);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    transition: transform 0.25s, border-color 0.25s;
+  }
+
+  .footer-socials a:hover {
+    transform: translateY(-2px);
+    border-color: rgba(212, 160, 23, 0.6);
+  }
+
+  .footer-socials img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+  }
 
   .page-wrap {
     margin-left: 0;
-    padding-top: 72px;
+    padding-top: 68px;
     padding-bottom: 0;
   }
 
-  .site-footer { padding: 2rem 1.25rem; }
+  .site-footer {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.35rem 1.25rem 1.5rem;
+  }
+
+  .footer-brand { font-size: 1.05rem; }
+  .footer-tagline { font-size: 0.48rem; letter-spacing: 0.13em; }
+  .footer-contact { grid-column: 1 / -1; text-align: left; gap: 0.2rem; }
+  .footer-contact-label { font-size: 0.5rem; }
+  .footer-contact a { font-size: 0.7rem; }
+  .footer-copy { grid-column: 1 / -1; font-size: 0.5rem; }
 
   .footer-contact { text-align: left; }
   .footer-contact a { overflow-wrap: anywhere; }
@@ -461,8 +508,10 @@ section {
 }
 
 @media (max-width: 390px) {
-  .side-nav { padding-left: 0.7rem; padding-right: 0.7rem; }
-  .nav-links { gap: 0.25rem; }
-  .nav-links a { min-width: 44px; padding-left: 0.2rem; padding-right: 0.2rem; }
-  .nav-links a .nav-label { font-size: 0.43rem; }
+  .side-nav { padding-left: 0.55rem; padding-right: 0.55rem; }
+  .nav-links { gap: 0.05rem; }
+  .nav-links a { min-width: 48px; padding-left: 0.28rem; padding-right: 0.28rem; }
+  .nav-links a .nav-label { font-size: 0.41rem; }
+  .footer-socials { gap: 0.5rem; }
+  .footer-socials a { width: 28px; height: 28px; }
 }
