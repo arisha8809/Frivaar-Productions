@@ -407,6 +407,54 @@
     @media (max-width: 900px) {
       .bts-section, .celeb-section { padding: 5rem 2rem; }
     }
+
+    @media (max-width: 768px) {
+      .hero {
+        height: auto;
+        min-height: calc(100svh - 64px);
+        padding: 4.5rem 1rem 3.5rem;
+      }
+
+      .hero-content {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+      }
+
+      .hero-eyebrow {
+        font-size: 0.52rem;
+        letter-spacing: 0.26em;
+      }
+
+      .hero-title {
+        font-size: clamp(2.6rem, 12.5vw, 4.2rem);
+        letter-spacing: -0.04em;
+        margin: 1.15rem 0;
+      }
+
+      .hero-tagline {
+        font-size: 1.05rem;
+        line-height: 1.35;
+      }
+
+      .hero-ctas {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+        margin-top: 2rem;
+      }
+
+      .hero-ctas .btn-gold {
+        width: min(100%, 22rem);
+        justify-content: center;
+        padding: 0.9rem 0.85rem;
+        font-size: 0.64rem;
+        letter-spacing: 0.14em;
+      }
+
+      .hero-scroll { display: none; }
+    }
   </style>
 </head>
 <body>

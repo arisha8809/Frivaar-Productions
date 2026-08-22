@@ -480,10 +480,25 @@
         grid-template-columns: 1fr; justify-items: center;
         padding: 4rem 2rem 2rem; gap: 2rem; min-height: auto;
       }
-      .turntable-svg-wrap { width: 320px; height: 320px; }
+      .turntable-svg-wrap { width: min(320px, 82vw); height: min(320px, 82vw); }
       .catalog-section { padding: 3rem 1.5rem 6rem; }
       .records-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
       .yt-wrap { width: 260px; }
+    }
+
+    @media (max-width: 768px) {
+      .player-stage { padding: 3rem 1rem 1.5rem; }
+      .catalog-section { padding: 3.5rem 0.85rem 6rem; }
+      .catalog-header { margin-bottom: 2rem; }
+      .records-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
+      }
+      .song-info { padding: 0.65rem 0.55rem 0.7rem; gap: 0.4rem; }
+      .song-title { font-size: 0.78rem; }
+      .song-artist { font-size: 0.54rem; }
+      .song-yt-link { width: 24px; height: 24px; font-size: 11px; }
+      .song-play-circle { width: 38px; height: 38px; font-size: 14px; }
     }
     .work-title{
     font-family: var(--font-display);
