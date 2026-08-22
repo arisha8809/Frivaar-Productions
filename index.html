@@ -6,7 +6,7 @@
   <title>Frivaar Productions — Born on a Friday</title>
   <meta name="description" content="Frivaar Productions — a music & film production house from Punjab, championing new talent and Punjabi culture worldwide." />
   <link rel="icon" href="assets/logo.png" type="image/png" />
-    <link rel="stylesheet" href="css/style.css?v=mobile-fix-9" />
+    <link rel="stylesheet" href="css/style.css?v=mobile-fix-10" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
   <style>
     /* ---- HERO ---- */
@@ -270,12 +270,25 @@
       }
 
       .bts-viewport {
-        overflow: hidden;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      .bts-viewport::-webkit-scrollbar {
+        display: none;
       }
 
       .bts-track {
         animation: none !important;
-        transform: translate3d(0, 0, 0);
+        transform: none;
+      }
+
+      .bts-card {
+        scroll-snap-align: start;
       }
     }
 
@@ -505,7 +518,7 @@
 
       .celeb-card {
         flex: 0 0 min(56vw, 220px);
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 4 / 5;
         scroll-snap-align: center;
       }
 
@@ -724,7 +737,7 @@
 
 </main>
 
-<script src="js/main.js?v=mobile-fix-9"></script>
+<script src="js/main.js?v=mobile-fix-10"></script>
 <script>
   // Keep muted BTS videos playing on mobile browsers after the page becomes visible.
   function resumeBtsVideos() {
@@ -738,29 +751,34 @@
     if (!document.hidden) resumeBtsVideos();
   });
 
-  // Mobile BTS loop: use a small timer-driven transform rather than CSS animation
-  // or a scroll container, both of which can be paused or ignored by phone browsers.
+    // Mobile BTS slider: advance one visible card at a time using the browser's
+  // native horizontal scroll API. This remains swipeable and avoids transform
+  // animation timing issues on iOS and Android browsers.
   (function () {
     if (!window.matchMedia('(max-width: 600px)').matches) return;
-    var track = document.querySelector('.bts-track');
-    var firstSet = track && track.querySelector('.bts-set');
-    if (!track || !firstSet) return;
-
-    var offset = 0;
-    var stepSize = 0.9;
+    var viewport = document.querySelector('.bts-viewport');
+    var cards = viewport ? Array.prototype.slice.call(viewport.querySelectorAll('.bts-card')) : [];
+    if (!viewport || cards.length < 2) return;
+    var index = 0;
     var timer;
 
-    function move() {
-      var setWidth = firstSet.getBoundingClientRect().width;
-      if (!setWidth) return;
-      offset += stepSize;
-      if (offset >= setWidth) offset = 0;
-      track.style.transform = 'translate3d(-' + offset.toFixed(2) + 'px, 0, 0)';
+    function cardLeft(card) {
+      return card.getBoundingClientRect().left - viewport.getBoundingClientRect().left + viewport.scrollLeft;
+    }
+
+    function advance() {
+      index += 1;
+      if (index >= cards.length) {
+        index = 0;
+        viewport.scrollTo({ left: 0, behavior: 'auto' });
+        return;
+      }
+      viewport.scrollTo({ left: cardLeft(cards[index]), behavior: 'smooth' });
     }
 
     function start() {
       if (timer) window.clearInterval(timer);
-      timer = window.setInterval(move, 50);
+      timer = window.setInterval(advance, 3200);
     }
 
     start();
