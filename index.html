@@ -6,7 +6,7 @@
   <title>Frivaar Productions — Born on a Friday</title>
   <meta name="description" content="Frivaar Productions — a music & film production house from Punjab, championing new talent and Punjabi culture worldwide." />
   <link rel="icon" href="assets/logo.png" type="image/png" />
-    <link rel="stylesheet" href="css/style.css?v=mobile-fix-6" />
+    <link rel="stylesheet" href="css/style.css?v=mobile-fix-9" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
   <style>
     /* ---- HERO ---- */
@@ -274,7 +274,7 @@
       }
 
       .bts-track {
-        animation: btsAutoScroll 52s linear infinite !important;
+        animation: none !important;
         transform: translate3d(0, 0, 0);
       }
     }
@@ -504,13 +504,14 @@
       }
 
       .celeb-card {
-        flex: 0 0 min(76vw, 260px);
+        flex: 0 0 min(56vw, 220px);
         aspect-ratio: 4 / 3;
         scroll-snap-align: center;
       }
 
       .celeb-card video {
-        object-fit: contain;
+        object-fit: cover;
+        object-position: center;
         background: #050505;
       }
 
@@ -723,7 +724,7 @@
 
 </main>
 
-<script src="js/main.js?v=mobile-fix-6"></script>
+<script src="js/main.js?v=mobile-fix-9"></script>
 <script>
   // Keep muted BTS videos playing on mobile browsers after the page becomes visible.
   function resumeBtsVideos() {
@@ -737,8 +738,34 @@
     if (!document.hidden) resumeBtsVideos();
   });
 
-  // Mobile uses the CSS marquee above; this only retries muted inline-video playback.
-  // Keeping motion in CSS avoids iOS scroll-container quirks and preserves the seamless loop.
+  // Mobile BTS loop: use a small timer-driven transform rather than CSS animation
+  // or a scroll container, both of which can be paused or ignored by phone browsers.
+  (function () {
+    if (!window.matchMedia('(max-width: 600px)').matches) return;
+    var track = document.querySelector('.bts-track');
+    var firstSet = track && track.querySelector('.bts-set');
+    if (!track || !firstSet) return;
+
+    var offset = 0;
+    var stepSize = 0.9;
+    var timer;
+
+    function move() {
+      var setWidth = firstSet.getBoundingClientRect().width;
+      if (!setWidth) return;
+      offset += stepSize;
+      if (offset >= setWidth) offset = 0;
+      track.style.transform = 'translate3d(-' + offset.toFixed(2) + 'px, 0, 0)';
+    }
+
+    function start() {
+      if (timer) window.clearInterval(timer);
+      timer = window.setInterval(move, 50);
+    }
+
+    start();
+    window.addEventListener('pageshow', start);
+  }());
 
 
   // Celeb card click to play
