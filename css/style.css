@@ -370,35 +370,45 @@ section {
   :root { --nav-width: 0px; }
 
   .side-nav {
-    width: 100%;
+    width: calc(100% - 24px);
     height: 64px;
-    top: 0;
-    bottom: auto;
-    left: 0;
+    top: auto;
+    bottom: 12px;
+    left: 12px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    justify-content: initial;
     flex-direction: row;
-    padding: 0 0.85rem;
-    border-right: none;
-    border-top: none;
-    border-bottom: 1px solid rgba(212, 160, 23, 0.15);
+    padding: 0 0.75rem;
+    border: 1px solid rgba(212, 160, 23, 0.22);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   }
 
   .nav-logo {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
   }
 
   .nav-links {
+    justify-self: center;
     flex-direction: row;
-    gap: 0;
+    gap: 0.15rem;
   }
 
   .nav-links a {
-    padding: 0.65rem 0.35rem;
+    padding: 0.42rem 0.45rem 0.32rem;
+    gap: 3px;
+  }
+
+  .nav-links a .nav-icon {
+    font-size: 19px;
   }
 
   .nav-links a .nav-label {
-    font-size: 7px;
-    letter-spacing: 0.12em;
+    font-size: 6.5px;
+    letter-spacing: 0.11em;
   }
 
   .nav-links a::before {
@@ -411,18 +421,22 @@ section {
 
   .nav-links a:hover::before,
   .nav-links a.active::before {
-    width: 70%;
+    width: 72%;
     height: 2px;
   }
 
-  .nav-socials { flex-direction: row; gap: 0.7rem; }
-
-  .social-logo {
-    width: 19px;
-    height: 19px;
+  .nav-socials {
+    justify-self: end;
+    flex-direction: row;
+    gap: 0.5rem;
   }
 
-  .page-wrap { margin-left: 0; padding-top: 64px; }
+  .social-logo {
+    width: 17px;
+    height: 17px;
+  }
+
+  .page-wrap { margin-left: 0; padding-top: 0; padding-bottom: 88px; }
 
   .site-footer { padding: 2rem 1.25rem; }
 
@@ -431,4 +445,19 @@ section {
 
   body { cursor: auto; }
   .cursor, .cursor-ring { display: none; }
+}
+
+@media (max-width: 390px) {
+  .side-nav {
+    width: calc(100% - 16px);
+    left: 8px;
+    bottom: 8px;
+    padding-left: 0.55rem;
+    padding-right: 0.55rem;
+  }
+  .nav-links { gap: 0; }
+  .nav-links a { padding-left: 0.3rem; padding-right: 0.3rem; }
+  .nav-links a .nav-label { font-size: 6px; }
+  .nav-socials { gap: 0.4rem; }
+  .social-logo { width: 16px; height: 16px; }
 }

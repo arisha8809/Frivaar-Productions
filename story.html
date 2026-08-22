@@ -296,9 +296,59 @@
       .story-hero { padding: 3rem 2rem; height: auto; padding-top: 5rem; }
       .origin-section { padding: 5rem 2rem; }
       .origin-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .origin-sticky { position: static; }
+      .origin-sticky { position: relative; }
       .origin-sticky { min-height: 320px; }
       .mukti-section { grid-template-columns: 1fr; padding: 4rem 2rem; }
+    }
+
+    @media (max-width: 768px) {
+      .story-hero {
+        min-height: 420px;
+        padding: 3rem 1.25rem 6rem;
+      }
+
+      .story-hero h1 {
+        font-size: clamp(2.9rem, 14vw, 4.4rem);
+        line-height: 0.98;
+      }
+
+      .origin-section {
+        padding: 4rem 1.25rem 5rem;
+      }
+
+      .origin-grid {
+        gap: 1.5rem;
+      }
+
+      .origin-sticky {
+        min-height: 360px;
+        padding: 1.75rem 1.25rem;
+      }
+
+      .origin-body p {
+        font-size: 0.95rem;
+        line-height: 1.78;
+        margin-bottom: 1.4rem;
+      }
+
+      .origin-body .pull-quote {
+        padding-left: 1.1rem;
+        margin: 2rem 0;
+      }
+
+      .pull-quote p {
+        font-size: 1.25rem;
+      }
+
+      .mukti-section {
+        padding: 4rem 1.25rem 5rem;
+        gap: 2rem;
+      }
+
+      .mukti-text p {
+        font-size: 0.95rem;
+        line-height: 1.75;
+      }
     }
   </style>
 </head>

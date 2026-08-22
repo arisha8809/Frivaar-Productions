@@ -210,6 +210,10 @@
       will-change: transform;
     }
 
+    .bts-track.bts-js {
+      animation: none;
+    }
+
     .bts-set {
       display: flex;
       gap: 1rem;
@@ -253,14 +257,20 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+      /* Keep the visual strip moving slowly so mobile browsers do not freeze it. */
       .bts-track {
-        animation: none;
+        animation: btsAutoScroll 90s linear infinite !important;
       }
     }
 
     @media (max-width: 600px) {
       .bts-card {
         flex-basis: 68vw;
+      }
+
+      .bts-track {
+        animation-duration: 60s;
+        animation-play-state: running;
       }
     }
 
@@ -411,8 +421,8 @@
     @media (max-width: 768px) {
       .hero {
         height: auto;
-        min-height: calc(100svh - 64px);
-        padding: 4.5rem 1rem 3.5rem;
+        min-height: 100svh;
+        padding: 4.5rem 1rem 6.5rem;
       }
 
       .hero-content {
@@ -652,6 +662,46 @@
 
 <script src="js/main.js"></script>
 <script>
+  // Keep muted BTS videos playing on mobile browsers after the page becomes visible.
+  function resumeBtsVideos() {
+    document.querySelectorAll('.bts-card video').forEach(function (video) {
+      video.muted = true;
+      video.play().catch(function () {});
+    });
+  }
+  resumeBtsVideos();
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) resumeBtsVideos();
+  });
+
+  // JavaScript fallback keeps the seamless BTS loop moving on mobile browsers
+  // that pause or ignore long CSS animations.
+  (function () {
+    if (!window.matchMedia('(max-width: 600px)').matches) return;
+    var track = document.querySelector('.bts-track');
+    var firstSet = track && track.querySelector('.bts-set');
+    if (!track || !firstSet) return;
+
+    var offset = 0;
+    var lastTime = 0;
+    var speed = 22;
+    track.classList.add('bts-js');
+
+    function moveBts(now) {
+      if (!lastTime) lastTime = now;
+      var elapsed = Math.min(now - lastTime, 80);
+      lastTime = now;
+      var setWidth = firstSet.getBoundingClientRect().width;
+      if (setWidth > 0) {
+        offset -= speed * elapsed / 1000;
+        if (-offset >= setWidth) offset += setWidth;
+        track.style.transform = 'translate3d(' + offset + 'px, 0, 0)';
+      }
+      window.requestAnimationFrame(moveBts);
+    }
+    window.requestAnimationFrame(moveBts);
+  }());
+
   // Celeb card click to play
   document.querySelectorAll('.celeb-card').forEach(card => {
     card.addEventListener('click', () => {
