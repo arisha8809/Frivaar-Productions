@@ -350,19 +350,22 @@ section {
   color: var(--cream-dim);
   font-family: var(--font-ui);
   font-size: 0.78rem;
+  text-decoration: none;
   transition: color 0.3s;
 }
 
 .footer-contact a:hover {
   color: var(--gold);
+  text-decoration: underline;
 }
-
 .footer-copy {
   font-family: var(--font-mono);
   font-size: 0.6rem;
   color: var(--cream-dim);
   opacity: 0.5;
   letter-spacing: 0.1em;
+  align-self: center;
+  white-space: nowrap;
 }
 
 .footer-socials { display: none; }
@@ -481,13 +484,17 @@ section {
     padding-bottom: 0;
   }
 
-  .site-footer {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.35rem 1.25rem 1.5rem;
-  }
+.site-footer {
+  background: var(--black);
+  border-top: 1px solid rgba(212, 160, 23, 0.15);
+  padding: 3rem 4rem;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
 
   .footer-brand { font-size: 1.05rem; }
   .footer-tagline { font-size: 0.48rem; letter-spacing: 0.13em; }
