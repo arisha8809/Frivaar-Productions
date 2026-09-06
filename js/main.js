@@ -7,20 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---- Cinematic brand intro ----
   const intro = document.querySelector('.brand-intro');
   const introSkip = document.querySelector('.intro-skip');
-  const introSeenKey = 'frivaar-intro-seen';
   const closeIntro = () => {
     if (!intro || intro.classList.contains('is-done')) return;
     intro.classList.add('is-done');
-    try { sessionStorage.setItem(introSeenKey, '1'); } catch (_) {}
   };
 
   if (intro) {
-    let alreadySeen = false;
-    try { alreadySeen = sessionStorage.getItem(introSeenKey) === '1'; } catch (_) {}
-    if (alreadySeen || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       intro.classList.add('is-done');
     } else {
-      window.setTimeout(closeIntro, 4700);
+      window.setTimeout(closeIntro, 3500);
     }
     introSkip?.addEventListener('click', closeIntro);
   }
