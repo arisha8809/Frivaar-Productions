@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---- Cinematic brand intro ----
   const intro = document.querySelector('.brand-intro');
   const introSkip = document.querySelector('.intro-skip');
+  const mergeIntro = () => intro?.classList.add('is-merging');
   const closeIntro = () => {
     if (!intro || intro.classList.contains('is-done')) return;
     intro.classList.add('is-done');
@@ -16,7 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       intro.classList.add('is-done');
     } else {
-      window.setTimeout(closeIntro, 3500);
+      window.setTimeout(mergeIntro, 1750);
+      window.setTimeout(closeIntro, 3200);
     }
     introSkip?.addEventListener('click', closeIntro);
   }
