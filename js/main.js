@@ -5,16 +5,22 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // ---- Cinematic brand intro ----
+  document.body.classList.add('intro-active');
   const intro = document.querySelector('.brand-intro');
   const introSkip = document.querySelector('.intro-skip');
-  const mergeIntro = () => intro?.classList.add('is-merging');
+  const mergeIntro = () => {
+    intro?.classList.add('is-merging');
+    document.body.classList.add('intro-reveal');
+  };
   const closeIntro = () => {
     if (!intro || intro.classList.contains('is-done')) return;
+    document.body.classList.add('intro-reveal');
     intro.classList.add('is-done');
   };
 
   if (intro) {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.body.classList.add('intro-reveal');
       intro.classList.add('is-done');
     } else {
       window.setTimeout(mergeIntro, 1750);
