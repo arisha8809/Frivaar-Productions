@@ -358,6 +358,27 @@ section {
   color: var(--gold);
   text-decoration: underline;
 }
+.footer-offices {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+.footer-office {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 150px;
+}
+.footer-office a,
+.footer-office address {
+  color: var(--cream-dim);
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  line-height: 1.45;
+  font-style: normal;
+}
+.footer-office a { text-decoration: none; transition: color 0.3s; }
+.footer-office a:hover { color: var(--gold); text-decoration: underline; }
 .footer-copy {
   font-family: var(--font-mono);
   font-size: 0.6rem;
@@ -501,6 +522,9 @@ section {
   .footer-contact { grid-column: 1 / -1; text-align: left; gap: 0.2rem; }
   .footer-contact-label { font-size: 0.5rem; }
   .footer-contact a { font-size: 0.7rem; }
+  .footer-offices { grid-column: 1 / -1; width: 100%; gap: 1.25rem; flex-wrap: wrap; }
+  .footer-office { min-width: 0; flex: 1 1 140px; }
+  .footer-office a, .footer-office address { font-size: 0.65rem; }
   .footer-copy { grid-column: 1 / -1; font-size: 0.5rem; }
 
   .footer-contact { text-align: left; }
