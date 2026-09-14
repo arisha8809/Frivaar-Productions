@@ -627,6 +627,9 @@ section {
 .footer-office-list { gap: .15rem; }
 .footer-copy { font-size: .72rem; line-height: 1.8; text-align: right; }
 .footer-copy span { font-size: .72rem; font-weight: 600; letter-spacing: .04em; }
+.footer-credit { text-align: center; color: var(--cream-dim); font-size: .72rem; line-height: 1.8; }
+.footer-credit span { display: block; color: var(--gold); font-size: .78rem; font-weight: 600; letter-spacing: .05em; }
+.footer-credit small { display: block; font-size: .68rem; opacity: .65; }
 @media (max-width: 768px) {
   .site-footer { padding: 3.5rem 1.25rem 1.5rem; }
   .footer-grid, .footer-lower { grid-template-columns: 1fr 1fr; gap: 2rem 1.25rem; }
@@ -634,6 +637,7 @@ section {
   .footer-office-card { text-align: left; }
   .footer-lower { margin-top: 2.5rem; }
   .footer-copy { text-align: left; }
+  .footer-credit { text-align: center; }
 }
 @media (max-width: 420px) {
   .footer-grid, .footer-lower { grid-template-columns: 1fr; }
