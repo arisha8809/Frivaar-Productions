@@ -634,6 +634,16 @@ section {
 .footer-credit { grid-column: 2; text-align: center; color: var(--cream-dim); font-size: .72rem; line-height: 1.8; }
 .footer-credit span { display: block; color: var(--gold); font-size: .78rem; font-weight: 600; letter-spacing: .05em; }
 .footer-credit small { display: block; font-size: .68rem; opacity: .65; }
+.footer-contact-center { text-align: center; }
+.footer-contact-center .footer-heading { margin-bottom: .35rem; }
+.footer-country-row { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; max-width: 760px; margin: 2.2rem auto 0; }
+.footer-office-card { min-height: 0; }
+.footer-office-card .footer-heading { margin-bottom: .4rem; }
+.footer-office-card address { margin-bottom: .25rem; }
+.footer-india { text-align: left; }
+.footer-canada { text-align: right; }
+.footer-credit-line { margin-top: 2.2rem; color: var(--cream-dim); font-size: .72rem; line-height: 1.6; text-align: center; }
+.footer-credit-line span { margin: 0 .35rem; color: var(--gold); }
 @media (max-width: 768px) {
   .site-footer { padding: 2.5rem 1.25rem 1.25rem; }
   .footer-grid, .footer-lower { grid-template-columns: 1fr 1fr; gap: 2rem 1.25rem; }
@@ -642,8 +652,11 @@ section {
   .footer-lower { margin-top: 2.5rem; }
   .footer-copy { text-align: left; }
   .footer-credit { grid-column: 1 / -1; text-align: center; }
+  .footer-country-row { gap: 2rem; margin-top: 1.75rem; }
 }
 @media (max-width: 420px) {
   .footer-grid, .footer-lower { grid-template-columns: 1fr; }
   .footer-location { grid-column: auto; }
+  .footer-country-row { grid-template-columns: 1fr; gap: 1.25rem; }
+  .footer-india, .footer-canada { text-align: center; }
 }
