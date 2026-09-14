@@ -5,7 +5,7 @@
    Off-white: #F5F0E8
    ========================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Manrope:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
 :root {
   --gold: #D4A017;
@@ -22,6 +22,7 @@
   --font-display: 'Cormorant Garamond', serif;
   --font-ui: 'Rajdhani', sans-serif;
   --font-mono: 'Space Mono', monospace;
+  --font-footer: 'Manrope', sans-serif;
 
   --nav-width: 72px;
   --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -612,6 +613,20 @@ section {
 .footer-office-list > .footer-heading { margin-bottom: .4rem; }
 .footer-copy { align-self: end; color: var(--cream-dim); font-size: .68rem; letter-spacing: .04em; opacity: .65; text-align: right; white-space: normal; }
 .footer-copy span { display: inline-block; margin-bottom: .3rem; color: var(--gold); font-size: .7rem; letter-spacing: .08em; opacity: 1; }
+.site-footer,
+.site-footer * { font-family: var(--font-footer); }
+.site-footer { padding-top: 4rem; padding-bottom: 2.25rem; }
+.footer-grid { grid-template-columns: minmax(220px, 1fr) minmax(320px, 1.25fr); gap: 5rem; }
+.footer-heading,
+.footer-office-list > .footer-heading { margin-bottom: 1.15rem; font-size: .76rem; font-weight: 700; letter-spacing: .1em; }
+.footer-link,
+.footer-location address,
+.footer-office-list a { font-size: .9rem; line-height: 1.8; letter-spacing: .01em; }
+.footer-location { text-align: left; }
+.footer-lower { grid-template-columns: 1fr auto; gap: 2rem; margin-top: 3rem; padding-top: 1.5rem; align-items: end; }
+.footer-office-list { gap: .15rem; }
+.footer-copy { font-size: .72rem; line-height: 1.8; }
+.footer-copy span { font-size: .72rem; font-weight: 600; letter-spacing: .04em; }
 @media (max-width: 768px) {
   .site-footer { padding: 3.5rem 1.25rem 1.5rem; }
   .footer-grid, .footer-lower { grid-template-columns: 1fr 1fr; gap: 2rem 1.25rem; }
