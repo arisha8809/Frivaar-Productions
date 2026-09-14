@@ -615,7 +615,7 @@ section {
 .footer-copy span { display: inline-block; margin-bottom: .3rem; color: var(--gold); font-size: .7rem; letter-spacing: .08em; opacity: 1; }
 .site-footer,
 .site-footer * { font-family: var(--font-footer); }
-.site-footer { width: 100%; margin: 0 auto; padding: 2.75rem 15% 1.5rem; background: var(--black-2); }
+.site-footer { width: 100%; margin: 0 auto; padding: 2.75rem 25% 1.5rem; background: var(--black-2); }
 .footer-grid { grid-template-columns: minmax(200px, 1fr) minmax(210px, 1fr) minmax(210px, 1fr); gap: 2rem; align-items: start; }
 .footer-panel { min-height: 0; text-align: center; }
 .footer-heading,
