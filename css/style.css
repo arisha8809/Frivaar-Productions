@@ -616,14 +616,15 @@ section {
 .site-footer,
 .site-footer * { font-family: var(--font-footer); }
 .site-footer { padding-top: 2.75rem; padding-bottom: 1.5rem; }
-.footer-grid { grid-template-columns: minmax(200px, 1fr) minmax(210px, 1fr) minmax(210px, 1fr); gap: 2rem; }
+.footer-grid { grid-template-columns: minmax(200px, 1fr) minmax(210px, 1fr) minmax(210px, 1fr); gap: 2rem; align-items: start; }
+.footer-panel { min-height: 104px; }
 .footer-heading,
 .footer-office-list > .footer-heading { margin-bottom: 1.15rem; font-size: .76rem; font-weight: 700; letter-spacing: .1em; }
 .footer-link,
 .footer-location address,
 .footer-office-list a { font-size: .9rem; line-height: 1.8; letter-spacing: .01em; }
 .footer-location, .footer-office-card { text-align: left; }
-.footer-lower { grid-template-columns: 1fr; gap: .75rem; margin-top: 1.75rem; padding-top: 0; border-top: 0; align-items: end; }
+.footer-lower { grid-template-columns: 1fr; gap: .75rem; margin-top: .5rem; padding-top: 0; border-top: 0; align-items: end; }
 .footer-office-list { gap: .15rem; }
 .footer-copy { font-size: .72rem; line-height: 1.8; text-align: right; }
 .footer-copy span { font-size: .72rem; font-weight: 600; letter-spacing: .04em; }
