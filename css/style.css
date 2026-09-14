@@ -615,11 +615,11 @@ section {
 .footer-copy span { display: inline-block; margin-bottom: .3rem; color: var(--gold); font-size: .7rem; letter-spacing: .08em; opacity: 1; }
 .site-footer,
 .site-footer * { font-family: var(--font-footer); }
-.site-footer { padding-top: 2.75rem; padding-bottom: 1.5rem; }
+.site-footer { padding-top: 2.75rem; padding-bottom: 1.5rem; background: var(--black-2); }
 .footer-grid { grid-template-columns: minmax(200px, 1fr) minmax(210px, 1fr) minmax(210px, 1fr); gap: 2rem; align-items: start; }
 .footer-panel { min-height: 104px; }
 .footer-heading,
-.footer-office-list > .footer-heading { margin-bottom: 1.15rem; font-size: .76rem; font-weight: 700; letter-spacing: .1em; }
+.footer-office-list > .footer-heading { margin-bottom: 1.15rem; color: var(--gold); font-size: .76rem; font-weight: 700; letter-spacing: .1em; }
 .footer-link,
 .footer-location address,
 .footer-office-list a { font-size: .9rem; line-height: 1.8; letter-spacing: .01em; }
@@ -628,9 +628,9 @@ section {
 .footer-office-list { gap: .15rem; }
 .footer-copy { font-size: .72rem; line-height: 1.8; text-align: right; }
 .footer-copy span { font-size: .72rem; font-weight: 600; letter-spacing: .04em; }
-.footer-office-card > a { color: var(--cream); font-size: .9rem; font-weight: 600; }
+.footer-office-card > a { color: var(--cream-dim); font-size: .9rem; font-weight: 600; }
 .footer-office-card > a:hover { color: var(--gold-bright); }
-.footer-office-card address { color: var(--cream); }
+.footer-office-card address { color: var(--cream-dim); }
 .footer-credit { text-align: center; color: var(--cream-dim); font-size: .72rem; line-height: 1.8; }
 .footer-credit span { display: block; color: var(--gold); font-size: .78rem; font-weight: 600; letter-spacing: .05em; }
 .footer-credit small { display: block; font-size: .68rem; opacity: .65; }
